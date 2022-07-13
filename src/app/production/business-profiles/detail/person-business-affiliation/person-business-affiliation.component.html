@@ -1,0 +1,430 @@
+<abp-page [title]="'::PersonBusinessAffiliations' | abpLocalization">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
+      <button
+        *abpPermission="'Platform.PersonBusinessAffiliations.Create'"
+        class='btn btn-primary btn-sm'
+        type='button'
+        (click)='create()'
+      >
+        <i class='fa fa-plus me-1' aria-hidden='true'></i>
+        {{ '::NewPersonBusinessAffiliation' | abpLocalization }}
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <abp-advanced-entity-filters localizationSourceName='' [list]='list'>
+    <abp-advanced-entity-filters-form>
+      <form #filterForm (keyup.enter)='list.get()'>
+        <div class='row'>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='designationFilter'>
+                {{ '::Designation' | abpLocalization }}
+              </label>
+
+              <input
+                id='designationFilter'
+                class='form-control'
+                [(ngModel)]='filters.designation'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='minStartDate'>
+                {{ '::MinStartDate' | abpLocalization }}
+              </label>
+
+              <div class='input-group' validationTarget>
+                <input
+                  id='minStartDate'
+                  class='form-control'
+                  #minStartDateInput
+                  #minStartDateDatepicker='ngbDatepicker'
+                  name='minStartDate'
+                  ngbDatepicker
+                  container='body'
+                  readonly
+                  (click)='minStartDateDatepicker.toggle()'
+                  (keyup.space)='minStartDateDatepicker.toggle()'
+                  [(ngModel)]='filters.startDateMin'
+                  [ngModelOptions]='{ standalone: true }'
+                />
+                <div *ngIf='minStartDateInput.value' class='input-group-append'>
+                  <button
+                    class='btn btn-link px-2'
+                    type='button'
+                    [title]="'AbpUi::Clear' | abpLocalization"
+                    (click)='
+                      minStartDateDatepicker.writeValue(null);
+                      minStartDateDatepicker.manualDateChange(null, true)
+                    '
+                  >
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='maxStartDate'>
+                {{ '::MaxStartDate' | abpLocalization }}
+              </label>
+
+              <div class='input-group' validationTarget>
+                <input
+                  id='maxStartDate'
+                  class='form-control'
+                  #maxStartDateInput
+                  #maxStartDateDatepicker='ngbDatepicker'
+                  name='maxStartDate'
+                  ngbDatepicker
+                  readonly
+                  (click)='maxStartDateDatepicker.toggle()'
+                  (keyup.space)='maxStartDateDatepicker.toggle()'
+                  [(ngModel)]='filters.startDateMax'
+                  [ngModelOptions]='{ standalone: true }'
+                />
+                <div *ngIf='maxStartDateInput.value' class='input-group-append'>
+                  <button
+                    class='btn btn-link px-2'
+                    type='button'
+                    [title]="'AbpUi::Clear' | abpLocalization"
+                    (click)='
+                      maxStartDateDatepicker.writeValue(null);
+                      maxStartDateDatepicker.manualDateChange(null, true)
+                    '
+                  >
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='minEndDate'>
+                {{ '::MinEndDate' | abpLocalization }}
+              </label>
+
+              <div class='input-group' validationTarget>
+                <input
+                  id='minEndDate'
+                  class='form-control'
+                  #minEndDateInput
+                  #minEndDateDatepicker='ngbDatepicker'
+                  name='minEndDate'
+                  ngbDatepicker
+                  container='body'
+                  readonly
+                  (click)='minEndDateDatepicker.toggle()'
+                  (keyup.space)='minEndDateDatepicker.toggle()'
+                  [(ngModel)]='filters.endDateMin'
+                  [ngModelOptions]='{ standalone: true }'
+                />
+                <div *ngIf='minEndDateInput.value' class='input-group-append'>
+                  <button
+                    class='btn btn-link px-2'
+                    type='button'
+                    [title]="'AbpUi::Clear' | abpLocalization"
+                    (click)='
+                      minEndDateDatepicker.writeValue(null);
+                      minEndDateDatepicker.manualDateChange(null, true)
+                    '
+                  >
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='maxEndDate'>
+                {{ '::MaxEndDate' | abpLocalization }}
+              </label>
+
+              <div class='input-group' validationTarget>
+                <input
+                  id='maxEndDate'
+                  class='form-control'
+                  #maxEndDateInput
+                  #maxEndDateDatepicker='ngbDatepicker'
+                  name='maxEndDate'
+                  ngbDatepicker
+                  readonly
+                  (click)='maxEndDateDatepicker.toggle()'
+                  (keyup.space)='maxEndDateDatepicker.toggle()'
+                  [(ngModel)]='filters.endDateMax'
+                  [ngModelOptions]='{ standalone: true }'
+                />
+                <div *ngIf='maxEndDateInput.value' class='input-group-append'>
+                  <button
+                    class='btn btn-link px-2'
+                    type='button'
+                    [title]="'AbpUi::Clear' | abpLocalization"
+                    (click)='
+                      maxEndDateDatepicker.writeValue(null);
+                      maxEndDateDatepicker.manualDateChange(null, true)
+                    '
+                  >
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='businessProfileIdFilter'>
+                {{ '::BusinessProfile' | abpLocalization }}
+              </label>
+              <abp-lookup-typeahead
+                cid='businessProfileIdFilter'
+                displayNameProp='enterpriseName'
+                [getFn]='service.getBusinessProfileLookup'
+                [(ngModel)]='filters.businessProfileId'
+                [ngModelOptions]='{ standalone: true }'
+              ></abp-lookup-typeahead>
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='personProfileIdFilter'>
+                {{ '::PersonProfile' | abpLocalization }}
+              </label>
+              <abp-lookup-typeahead
+                cid='personProfileIdFilter'
+                displayNameProp='firstName'
+                [getFn]='service.getPersonProfileLookup'
+                [(ngModel)]='filters.personProfileId'
+                [ngModelOptions]='{ standalone: true }'
+              ></abp-lookup-typeahead>
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto align-self-end mb-3'>
+            <div class='row'>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-outline-primary' (click)='clearFilters()'>
+                  <span>{{ 'AbpUi::Clear' | abpLocalization }}</span>
+                </button>
+              </div>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-primary' (click)='list.get()'>
+                  <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </abp-advanced-entity-filters-form>
+  </abp-advanced-entity-filters>
+
+  <div class='card'>
+    <div class='card-body'>
+      <ngx-datatable [rows]='data.items' [count]='data.totalCount' [list]='list' default>
+
+        <ngx-datatable-column
+          name="{{ '::PersonProfile' | abpLocalization }}"
+          prop='personProfile.fullName'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.personProfile?.fullName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="{{ '::Designation' | abpLocalization }}"
+          prop='personBusinessAffiliation.designation'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.personBusinessAffiliation.designation }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="{{ '::StartDate' | abpLocalization }}"
+          prop='personBusinessAffiliation.startDate'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.personBusinessAffiliation.startDate | date }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="{{ '::EndDate' | abpLocalization }}"
+          prop='personBusinessAffiliation.endDate'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.personBusinessAffiliation.endDate | date }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          [name]="'AbpUi::Actions' | abpLocalization"
+          [maxWidth]='150'
+          [width]='150'
+          [sortable]='false'
+        >
+          <ng-template let-row='row' let-i='rowIndex' ngx-datatable-cell-template>
+            <div ngbDropdown container='body' class='d-inline-block'>
+              <button
+                class='btn btn-primary btn-sm dropdown-toggle'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                ngbDropdownToggle
+              >
+                <i class='fa fa-cog me-1' aria-hidden='true'></i>
+                {{ 'AbpUi::Actions' | abpLocalization }}
+              </button>
+
+              <div ngbDropdownMenu>
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.PersonBusinessAffiliations.Edit'"
+                  (click)='update(row)'
+                >
+                  {{ 'AbpUi::Edit' | abpLocalization }}
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.PersonBusinessAffiliations.Delete'"
+                  (click)='delete(row)'
+                >
+                  {{ 'AbpUi::Delete' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+</abp-page>
+
+<abp-modal [busy]='isModalBusy' [(visible)]='isModalOpen'>
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected ? 'AbpUi::Edit' : '::NewPersonBusinessAffiliation') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form
+      [formGroup]='form'
+      id='person-business-affiliation'
+      (ngSubmit)='submitForm()'
+      validateOnSubmit
+    >
+      <div class='mt-2 fade-in-top'>
+        <div class='mb-3'>
+          <label class='form-label' for='person-business-affiliation-designation'>
+            {{ '::Designation' | abpLocalization }} *
+          </label>
+
+          <input
+            id='person-business-affiliation-designation'
+            formControlName='designation'
+            class='form-control'
+            autofocus
+          />
+        </div>
+        <div class='mb-3'>
+          <label class='form-label' for='person-business-affiliation-start-date'>
+            {{ '::StartDate' | abpLocalization }}
+          </label>
+
+          <div class='input-group' validationTarget>
+            <input
+              readonly
+              id='person-business-affiliation-start-date'
+              formControlName='startDate'
+              class='form-control'
+              ngbDatepicker
+              #startDateInput
+              #startDateDatepicker='ngbDatepicker'
+              (click)='startDateDatepicker.open()'
+              (keyup.space)='startDateDatepicker.open()'
+            />
+            <div *ngIf='startDateInput.value' class='input-group-append'>
+              <button
+                class='btn btn-link px-2'
+                type='button'
+                [title]="'AbpUi::Clear' | abpLocalization"
+                (click)='
+                  startDateDatepicker.writeValue(null);
+                  startDateDatepicker.manualDateChange(null, true)
+                '
+              >
+                <i class='fa fa-times' aria-hidden='true'></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class='mb-3'>
+          <label class='form-label' for='person-business-affiliation-end-date'>
+            {{ '::EndDate' | abpLocalization }}
+          </label>
+
+          <div class='input-group' validationTarget>
+            <input
+              readonly
+              id='person-business-affiliation-end-date'
+              formControlName='endDate'
+              class='form-control'
+              ngbDatepicker
+              #endDateInput
+              #endDateDatepicker='ngbDatepicker'
+              (click)='endDateDatepicker.open()'
+              (keyup.space)='endDateDatepicker.open()'
+            />
+            <div *ngIf='endDateInput.value' class='input-group-append'>
+              <button
+                class='btn btn-link px-2'
+                type='button'
+                [title]="'AbpUi::Clear' | abpLocalization"
+                (click)='
+                  endDateDatepicker.writeValue(null); endDateDatepicker.manualDateChange(null, true)
+                '
+              >
+                <i class='fa fa-times' aria-hidden='true'></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='person-business-affiliation-person-profile-id'>
+            {{ '::PersonProfile' | abpLocalization }} *
+          </label>
+          <abp-lookup-typeahead
+            cid='person-business-affiliation-person-profile-id'
+            formControlName='personProfileId'
+            displayNameProp='fullName'
+            [getFn]='service.getPersonProfileLookup'
+            [editingData]='selected?.personProfile'
+          ></abp-lookup-typeahead>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type='button' class='btn btn-secondary' abpClose>
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+
+    <abp-button iconClass='fa fa-check' buttonType='submit' formName='person-business-affiliation'>
+      {{ 'AbpUi::Save' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>

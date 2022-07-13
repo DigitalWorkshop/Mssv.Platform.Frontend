@@ -1,0 +1,451 @@
+<abp-page [title]="'::PersonProfiles' | abpLocalization">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
+      <button
+        *abpPermission="'Platform.PersonProfiles.Create'"
+        class='btn btn-primary btn-sm'
+        type='button'
+        (click)='create()'
+      >
+        <i class='fa fa-plus me-1' aria-hidden='true'></i>
+        {{ '::NewPersonProfile' | abpLocalization }}
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <abp-advanced-entity-filters localizationSourceName='' [list]='list'>
+    <abp-advanced-entity-filters-form>
+      <form #filterForm (keyup.enter)='list.get()'>
+        <div class='row'>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='avatarFilter'>
+                {{ '::Avatar' | abpLocalization }}
+              </label>
+
+              <input
+                id='avatarFilter'
+                class='form-control'
+                [(ngModel)]='filters.avatar'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='firstNameFilter'>
+                {{ '::FirstName' | abpLocalization }}
+              </label>
+
+              <input
+                id='firstNameFilter'
+                class='form-control'
+                [(ngModel)]='filters.firstName'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='lastNameFilter'>
+                {{ '::LastName' | abpLocalization }}
+              </label>
+
+              <input
+                id='lastNameFilter'
+                class='form-control'
+                [(ngModel)]='filters.lastName'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='emailFilter'>
+                {{ '::Email' | abpLocalization }}
+              </label>
+
+              <input
+                id='emailFilter'
+                class='form-control'
+                [(ngModel)]='filters.email'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='mobilePhoneFilter'>
+                {{ '::MobilePhone' | abpLocalization }}
+              </label>
+
+              <input
+                id='mobilePhoneFilter'
+                class='form-control'
+                [(ngModel)]='filters.mobilePhone'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='officePhoneFilter'>
+                {{ '::OfficePhone' | abpLocalization }}
+              </label>
+
+              <input
+                id='officePhoneFilter'
+                class='form-control'
+                [(ngModel)]='filters.officePhone'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='jobTitleFilter'>
+                {{ '::JobTitle' | abpLocalization }}
+              </label>
+
+              <input
+                id='jobTitleFilter'
+                class='form-control'
+                [(ngModel)]='filters.jobTitle'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto align-self-end mb-3'>
+            <div class='row'>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-outline-primary' (click)='clearFilters()'>
+                  <span>{{ 'AbpUi::Clear' | abpLocalization }}</span>
+                </button>
+              </div>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-primary' (click)='list.get()'>
+                  <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </abp-advanced-entity-filters-form>
+  </abp-advanced-entity-filters>
+
+  <div class='card'>
+    <div class='card-body'>
+      <ngx-datatable [rows]='data.items' [count]='data.totalCount' [list]='list' default>
+
+        <ngx-datatable-column name="{{ '::Avatar' | abpLocalization }}" prop='avatar'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.avatar }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::FirstName' | abpLocalization }}" prop='firstName'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.firstName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::LastName' | abpLocalization }}" prop='lastName'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.lastName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::MobilePhone' | abpLocalization }}" prop='mobilePhone'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.mobilePhone }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::OfficePhone' | abpLocalization }}" prop='officePhone'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.officePhone }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::Email' | abpLocalization }}" prop='email'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.email }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::JobTitle' | abpLocalization }}" prop='jobTitle'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.jobTitle }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          [name]="'AbpUi::Actions' | abpLocalization"
+          [maxWidth]='150'
+          [width]='150'
+          [sortable]='false'
+        >
+          <ng-template let-row='row' let-i='rowIndex' ngx-datatable-cell-template>
+            <div ngbDropdown container='body' class='d-inline-block'>
+              <button
+                class='btn btn-primary btn-sm dropdown-toggle'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                ngbDropdownToggle
+              >
+                <i class='fa fa-cog me-1' aria-hidden='true'></i>
+                {{ 'AbpUi::Actions' | abpLocalization }}
+              </button>
+
+              <div ngbDropdownMenu>
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.PersonProfiles.Edit'"
+                  (click)='update(row)'
+                >
+                  {{ 'AbpUi::Edit' | abpLocalization }}
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.PersonProfiles.Delete'"
+                  (click)='delete(row)'
+                >
+                  {{ 'AbpUi::Delete' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+</abp-page>
+
+<abp-modal [busy]='isModalBusy' [(visible)]='isModalOpen' centered='true' scrollable='true' size='Large'>
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected ? 'AbpUi::Edit' : '::NewPersonProfile') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+
+    <form [formGroup]='form' id='person-profile' (ngSubmit)='submitForm()' validateOnSubmit>
+
+      <ul ngbNav #nav='ngbNav' [(activeId)]='active' class='nav-tabs'>
+        <li [ngbNavItem]='1'>
+          <a ngbNavLink>General</a>
+          <ng-template ngbNavContent>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-first-name'>
+                {{ '::FirstName' | abpLocalization }} *
+              </label>
+
+              <input id='person-profile-first-name' formControlName='firstName' class='form-control' autofocus/>
+            </div>
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-last-name'>
+                {{ '::LastName' | abpLocalization }} *
+              </label>
+
+              <input id='person-profile-last-name' formControlName='lastName' class='form-control' />
+            </div>
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-mobile-phone'>
+                {{ '::MobilePhone' | abpLocalization }}
+              </label>
+
+              <ngx-intl-tel-input
+                [cssClass]="'form-control'"
+                [preferredCountries]='preferredCountries'
+                [enableAutoCountrySelect]='true'
+                [enablePlaceholder]='true'
+                [searchCountryFlag]='true'
+                [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                [selectFirstCountry]='false'
+                [selectedCountryISO]='CountryISO.SouthAfrica'
+                [maxLength]='15'
+                [phoneValidation]='true'
+                [separateDialCode]='separateDialCode'
+                [numberFormat]='PhoneNumberFormat.National'
+
+                formControlName='mobilePhone'
+                id='person-profile-mobile-phone'
+              >
+              </ngx-intl-tel-input>
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-office-phone'>
+                {{ '::OfficePhone' | abpLocalization }}
+              </label>
+
+              <ngx-intl-tel-input
+                [cssClass]="'form-control'"
+                [preferredCountries]='preferredCountries'
+                [enableAutoCountrySelect]='true'
+                [enablePlaceholder]='true'
+                [searchCountryFlag]='true'
+                [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                [selectFirstCountry]='false'
+                [selectedCountryISO]='CountryISO.SouthAfrica'
+                [maxLength]='15'
+                [phoneValidation]='true'
+                [separateDialCode]='separateDialCode'
+                [numberFormat]='PhoneNumberFormat.National'
+
+                formControlName='officePhone'
+                id='person-profile-office-phone'
+              >
+              </ngx-intl-tel-input>
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-email'>
+                {{ '::Email' | abpLocalization }}
+              </label>
+
+              <input id='person-profile-email' formControlName='email' class='form-control' />
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-job-title'>
+                {{ '::JobTitle' | abpLocalization }}
+              </label>
+
+              <input id='person-profile-job-title' formControlName='jobTitle' class='form-control' />
+            </div>
+
+          </ng-template>
+        </li>
+        <li [ngbNavItem]='2'>
+          <a ngbNavLink>Extra</a>
+          <ng-template ngbNavContent>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-avatar'>
+                {{ '::Avatar' | abpLocalization }}
+              </label>
+
+              <input
+                id='person-profile-avatar'
+                formControlName='avatar'
+                class='form-control'
+              />
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-nickname'>
+                {{ '::Nickname' | abpLocalization }}
+              </label>
+
+              <input id='person-profile-nickname' formControlName='nickname' class='form-control' />
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-birthday'>
+                {{ '::Birthday' | abpLocalization }}
+              </label>
+
+              <div class='input-group' validationTarget>
+                <input
+                  readonly
+                  id='person-profile-birthday'
+                  formControlName='birthday'
+                  class='form-control'
+                  ngbDatepicker
+                  #birthdayInput
+                  #birthdayDatepicker='ngbDatepicker'
+                  (click)='birthdayDatepicker.open()'
+                  (keyup.space)='birthdayDatepicker.open()'
+                />
+                <div *ngIf='birthdayInput.value' class='input-group-append'>
+                  <button
+                    class='btn btn-link px-2'
+                    type='button'
+                    [title]="'AbpUi::Clear' | abpLocalization"
+                    (click)='
+                  birthdayDatepicker.writeValue(null);
+                  birthdayDatepicker.manualDateChange(null, true)
+                '
+                  >
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-fax'>
+                {{ '::Fax' | abpLocalization }}
+              </label>
+
+              <ngx-intl-tel-input
+                [cssClass]="'form-control'"
+                [preferredCountries]='preferredCountries'
+                [enableAutoCountrySelect]='true'
+                [enablePlaceholder]='true'
+                [searchCountryFlag]='true'
+                [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                [selectFirstCountry]='false'
+                [selectedCountryISO]='CountryISO.SouthAfrica'
+                [maxLength]='15'
+                [phoneValidation]='true'
+                [separateDialCode]='separateDialCode'
+                [numberFormat]='PhoneNumberFormat.National'
+
+                formControlName='fax'
+                id='person-profile-fax'
+              >
+              </ngx-intl-tel-input>
+            </div>
+
+            <div class='mb-3'>
+              <label class='form-label' for='person-profile-notes'>
+                {{ '::Notes' | abpLocalization }}
+              </label>
+
+              <textarea id='person-profile-notes' formControlName='notes' class='form-control' rows='3'></textarea>
+
+            </div>
+
+
+          </ng-template>
+        </li>
+      </ul>
+
+      <div [ngbNavOutlet]='nav' class='mt-2 fade-in-top'></div>
+
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type='button' class='btn btn-secondary' abpClose>
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+
+    <abp-button iconClass='fa fa-check' buttonType='submit' formName='person-profile'>
+      {{ 'AbpUi::Save' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>

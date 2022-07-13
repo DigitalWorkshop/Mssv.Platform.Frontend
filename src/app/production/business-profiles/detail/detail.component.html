@@ -1,0 +1,277 @@
+<abp-page [title]="'::BusinessProfiles' | abpLocalization">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
+      <button
+        class='btn btn-secondary btn-sm'
+        type='button'
+        (click)='back()'
+      >
+        <i class='fa fa-backward me-1' aria-hidden='true'></i>
+        {{ '::Back' | abpLocalization }}
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <div class='card'>
+    <div class='card-body'>
+      <div class='text-lg-end pt-2'>
+        <button class='btn btn-warning' type='button' data-busy-text='Processing...'><i class='fa fa-pencil'></i> <span>Edit</span>
+        </button>
+        <button class='btn btn-info' type='button' data-busy-text='Processing...'><i class='fa fa-info'></i> <span>Information</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class='card'>
+    <div class='card-body'>
+      <div id='BusinessProfileArea'>
+
+        <div class='row'>
+
+          <div class='col-md-2'>
+            <ul ngbNav #nav='ngbNav' class='nav-pills' orientation='vertical'>
+
+              <li ngbNavItem>
+                <a ngbNavLink>
+                  {{ 'General' | abpLocalization }}
+                </a>
+                <ng-template ngbNavContent>
+
+                  <form [formGroup]='formTab1' id='business-profile-part-1' (ngSubmit)='submitForm();'
+                        validateOnSubmit>
+
+                    <div class='mt-2 fade-in-top'>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-enterprise-name'>
+                          {{ '::EnterpriseName' | abpLocalization }} *
+                        </label>
+
+                        <input
+                          id='business-profile-enterprise-name'
+                          formControlName='enterpriseName'
+                          class='form-control'
+                          maxlength='100'
+                          autofocus
+                        />
+                      </div>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-primary-phone'>
+                          {{ '::PrimaryPhone' | abpLocalization }}
+                        </label>
+                        <ngx-intl-tel-input
+                          [cssClass]="'form-control'"
+                          [preferredCountries]='preferredCountries'
+                          [enableAutoCountrySelect]='true'
+                          [enablePlaceholder]='true'
+                          [searchCountryFlag]='true'
+                          [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                          [selectFirstCountry]='false'
+                          [selectedCountryISO]='CountryISO.SouthAfrica'
+                          [maxLength]='15'
+                          [phoneValidation]='true'
+                          [separateDialCode]='separateDialCode'
+                          [numberFormat]='PhoneNumberFormat.National'
+
+                          formControlName='primaryPhone'
+                          id='business-profile-primary-phone'
+                        >
+                        </ngx-intl-tel-input>
+                      </div>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-secondary-phone'>
+                          {{ '::SecondaryPhone' | abpLocalization }}
+                        </label>
+                        <ngx-intl-tel-input
+                          [cssClass]="'form-control'"
+                          [preferredCountries]='preferredCountries'
+                          [enableAutoCountrySelect]='true'
+                          [enablePlaceholder]='true'
+                          [searchCountryFlag]='true'
+                          [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                          [selectFirstCountry]='false'
+                          [selectedCountryISO]='CountryISO.SouthAfrica'
+                          [maxLength]='15'
+                          [phoneValidation]='true'
+                          [separateDialCode]='separateDialCode'
+                          [numberFormat]='PhoneNumberFormat.National'
+                          formControlName='secondaryPhone'
+                          id='business-profile-secondary-phone'
+                        >
+                        </ngx-intl-tel-input>
+                      </div>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-fax'>
+                          {{ '::Fax' | abpLocalization }}
+                        </label>
+
+                        <ngx-intl-tel-input
+                          [cssClass]="'form-control'"
+                          [preferredCountries]='preferredCountries'
+                          [enableAutoCountrySelect]='true'
+                          [enablePlaceholder]='true'
+                          [searchCountryFlag]='true'
+                          [searchCountryField]='[
+                                                  SearchCountryField.Iso2,
+                                                  SearchCountryField.Name
+                                                ]'
+                          [selectFirstCountry]='false'
+                          [selectedCountryISO]='CountryISO.SouthAfrica'
+                          [maxLength]='15'
+                          [phoneValidation]='true'
+                          [separateDialCode]='separateDialCode'
+                          [numberFormat]='PhoneNumberFormat.National'
+                          formControlName='fax'
+                          id='business-profile-fax'
+                        >
+                        </ngx-intl-tel-input>
+                      </div>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-website'>
+                          {{ '::Website' | abpLocalization }}
+                        </label>
+
+                        <input id='business-profile-website' type='url' formControlName='website'
+                               class='form-control' />
+                      </div>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-tags'>
+                          {{ '::Tags' | abpLocalization }}
+                        </label>
+
+                        <input id='business-profile-tags' formControlName='tags'
+                                   class='form-control' />
+                      </div>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-description'>
+                          {{ '::Description' | abpLocalization }}
+                        </label>
+
+                        <textarea
+                          id='business-profile-description'
+                          formControlName='description'
+                          class='form-control'
+                          rows='3'
+                        ></textarea>
+                      </div>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-notes'>
+                          {{ '::Notes' | abpLocalization }}
+                        </label>
+
+                        <textarea
+                          id='business-profile-notes'
+                          formControlName='notes'
+                          class='form-control'
+                          rows='3'>
+                        </textarea>
+                      </div>
+                    </div>
+                    <hr class=''>
+                    <button type='submit' class='btn btn-primary'> Save</button>
+                  </form>
+
+                </ng-template>
+              </li>
+
+              <li ngbNavItem>
+                <a ngbNavLink>
+                  {{ 'Profile' | abpLocalization }}
+                </a>
+                <ng-template ngbNavContent>
+                  <form [formGroup]='formTab1' id='business-profile-part-2' (ngSubmit)='submitForm();' validateOnSubmit>
+
+                    <div class='mt-2 fade-in-top'>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-acronym'>
+                          {{ '::Acronym' | abpLocalization }}
+                        </label>
+
+                        <input
+                          id='business-profile-acronym'
+                          formControlName='acronym'
+                          class='form-control'
+                          maxlength='5'
+                        />
+                      </div>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-registration-number'>
+                          {{ '::RegistrationNumber' | abpLocalization }}
+                        </label>
+
+                        <input
+                          id='business-profile-registration-number'
+                          formControlName='registrationNumber'
+                          class='form-control'
+                        />
+                      </div>
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-tax-number'>
+                          {{ '::TaxNumber' | abpLocalization }}
+                        </label>
+
+                        <input
+                          id='business-profile-tax-number'
+                          formControlName='taxNumber'
+                          class='form-control'
+                        />
+                      </div>
+
+                      <div class='mb-3'>
+                        <label class='form-label' for='business-profile-company-logo'>
+                          {{ '::CompanyLogo' | abpLocalization }}
+                        </label>
+
+                        <input
+                          id='business-profile-company-logo'
+                          formControlName='companyLogo'
+                          class='form-control'
+                        />
+                      </div>
+                    </div>
+                    <hr class=''>
+                    <button type='submit' class='btn btn-primary'> Save</button>
+                  </form>
+                </ng-template>
+              </li>
+
+              <li ngbNavItem>
+                <a ngbNavLink>
+                  {{ 'Team' | abpLocalization }}
+                </a>
+                <ng-template ngbNavContent>
+                  <app-person-business-affiliation
+                    [businessProfile]='businessProfile'></app-person-business-affiliation>
+                </ng-template>
+              </li>
+
+              <li ngbNavItem>
+                <a ngbNavLink>
+                  {{ 'Addresses' | abpLocalization }}
+                </a>
+                <ng-template ngbNavContent>
+                  <app-business-addresses [businessProfile]='businessProfile'></app-business-addresses>
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+          <div class='col-md-10'>
+            <div [ngbNavOutlet]='nav' class='ms-4'></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</abp-page>

@@ -1,0 +1,205 @@
+<abp-page [title]="'::Addresses' | abpLocalization">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
+      <button
+        *abpPermission="'Platform.BusinessAddresses.Create'"
+        class='btn btn-primary btn-sm'
+        type='button'
+        (click)='create()'
+      >
+        <i class='fa fa-plus me-1' aria-hidden='true'></i>
+        {{ '::NewAddress' | abpLocalization }}
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <ngx-datatable [rows]='data.items' [count]='data.totalCount' [list]='list' default>
+
+    <ngx-datatable-column name="{{ '::Type' | abpLocalization }}" prop='type'>
+      <ng-template let-row='row' ngx-datatable-cell-template>
+        {{ row.type }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{ '::Line1' | abpLocalization }}" prop='line1'>
+      <ng-template let-row='row' ngx-datatable-cell-template>
+        {{ row.line1 }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{ '::City' | abpLocalization }}" prop='city'>
+      <ng-template let-row='row' ngx-datatable-cell-template>
+        {{ row.city }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{ '::StateProvince' | abpLocalization }}" prop='stateProvince'>
+      <ng-template let-row='row' ngx-datatable-cell-template>
+        {{ row.stateProvince }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="{{ '::Country' | abpLocalization }}" prop='country'>
+      <ng-template let-row='row' ngx-datatable-cell-template>
+        {{ row.country }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column
+      [name]="'AbpUi::Actions' | abpLocalization"
+      [maxWidth]='150'
+      [width]='150'
+      [sortable]='false'
+    >
+      <ng-template let-row='row' let-i='rowIndex' ngx-datatable-cell-template>
+
+        <div ngbDropdown container='body' class='d-inline-block'>
+          <button
+            class='btn btn-primary btn-sm dropdown-toggle'
+            data-toggle='dropdown'
+            aria-haspopup='true'
+            ngbDropdownToggle
+          >
+            <i class='fa fa-cog me-1' aria-hidden='true'></i>
+            {{ 'AbpUi::Actions' | abpLocalization }}
+          </button>
+
+          <div ngbDropdownMenu>
+            <button
+              ngbDropdownItem
+              *abpPermission="'Platform.BusinessAddresses.Edit'"
+              (click)='update(row)'
+            >
+              {{ 'AbpUi::Edit' | abpLocalization }}
+            </button>
+
+            <button
+              ngbDropdownItem
+              *abpPermission="'Platform.BusinessAddresses.Delete'"
+              (click)='delete(row)'
+            >
+              {{ 'AbpUi::Delete' | abpLocalization }}
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+</abp-page>
+
+<abp-modal [busy]='isModalBusy' [(visible)]='isModalOpen'>
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected ? 'AbpUi::Edit' : '::NewAddress') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]='form' id='address' (ngSubmit)='submitForm()' validateOnSubmit>
+
+
+      <div class='mb-3'>
+        <label class='form-label' for='address-type'> {{ '::Type' | abpLocalization }} * </label>
+
+        <select id='address-type' formControlName='type' class='form-select form-control' autofocus>
+          <option [ngValue]=''></option>
+          <option
+            *ngFor="let option of addressTypeOptions; trackBy: track.by('key')"
+            [ngValue]='option.key'
+          >
+            {{ '::Enum:AddressType:' + option.key | abpLocalization }}
+          </option>
+        </select>
+      </div>
+
+
+      <div class='mb-3'>
+        <label class='form-label' for='address-line1'>
+          {{ '::Line1' | abpLocalization }}
+        </label>
+
+        <input id='address-line1' formControlName='line1' class='form-control' maxlength='100' />
+      </div>
+      <div class='mb-3'>
+        <label class='form-label' for='address-line2'>
+          {{ '::Line2' | abpLocalization }}
+        </label>
+
+        <input id='address-line2' formControlName='line2' class='form-control' maxlength='100' />
+      </div>
+      <div class='mb-3'>
+        <label class='form-label' for='address-line3'>
+          {{ '::Line3' | abpLocalization }}
+        </label>
+
+        <input id='address-line3' formControlName='line3' class='form-control' maxlength='100' />
+      </div>
+
+      <div class='mt-2 fade-in-top'>
+        <div class='mb-3'>
+          <label class='form-label' for='address-city'>
+            {{ '::City' | abpLocalization }}
+          </label>
+
+          <input
+            id='address-city'
+            formControlName='city'
+            class='form-control'
+            maxlength='50'
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='address-state-province'>
+            {{ '::StateProvince' | abpLocalization }}
+          </label>
+
+          <input
+            id='address-state-province'
+            formControlName='stateProvince'
+            class='form-control'
+            maxlength='50'
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='address-country'>
+            {{ '::Country' | abpLocalization }}
+          </label>
+
+          <input
+            id='address-country'
+            formControlName='country'
+            class='form-control'
+            maxlength='50'
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='address-postal-code'>
+            {{ '::PostalCode' | abpLocalization }}
+          </label>
+
+          <input
+            id='address-postal-code'
+            formControlName='postalCode'
+            class='form-control'
+            maxlength='50'
+          />
+        </div>
+
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type='button' class='btn btn-secondary' abpClose>
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+
+    <abp-button iconClass='fa fa-check' buttonType='submit' formName='address'>
+      {{ 'AbpUi::Save' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>

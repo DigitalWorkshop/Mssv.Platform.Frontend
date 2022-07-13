@@ -1,0 +1,246 @@
+<abp-page [title]="'::BusinessProfiles' | abpLocalization">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
+      <button
+        *abpPermission="'Platform.BusinessProfiles.Create'"
+        class='btn btn-primary btn-sm'
+        type='button'
+        (click)='create()'
+      >
+        <i class='fa fa-plus me-1' aria-hidden='true'></i>
+        {{ '::NewBusinessProfile' | abpLocalization }}
+      </button>
+    </div>
+  </abp-page-toolbar-container>
+
+  <abp-advanced-entity-filters localizationSourceName='' [list]='list'>
+    <abp-advanced-entity-filters-form>
+      <form #filterForm (keyup.enter)='list.get()'>
+        <div class='row'>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='acronymFilter'>
+                {{ '::Acronym' | abpLocalization }}
+              </label>
+
+              <input
+                id='acronymFilter'
+                class='form-control'
+                [(ngModel)]='filters.acronym'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='enterpriseNameFilter'>
+                {{ '::EnterpriseName' | abpLocalization }}
+              </label>
+
+              <input
+                id='enterpriseNameFilter'
+                class='form-control'
+                [(ngModel)]='filters.enterpriseName'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='registrationNumberFilter'>
+                {{ '::RegistrationNumber' | abpLocalization }}
+              </label>
+
+              <input
+                id='registrationNumberFilter'
+                class='form-control'
+                [(ngModel)]='filters.registrationNumber'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='taxNumberFilter'>
+                {{ '::TaxNumber' | abpLocalization }}
+              </label>
+
+              <input
+                id='taxNumberFilter'
+                class='form-control'
+                [(ngModel)]='filters.taxNumber'
+                [ngModelOptions]='{ standalone: true }'
+              />
+            </div>
+          </div>
+
+          <div class='col-12 col-sm-auto align-self-end mb-3'>
+            <div class='row'>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-outline-primary' (click)='clearFilters()'>
+                  <span>{{ 'AbpUi::Clear' | abpLocalization }}</span>
+                </button>
+              </div>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-primary' (click)='list.get()'>
+                  <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </abp-advanced-entity-filters-form>
+  </abp-advanced-entity-filters>
+
+  <div class='card'>
+    <div class='card-body'>
+      <ngx-datatable [rows]='data.items' [count]='data.totalCount' [list]='list' default>
+
+        <ngx-datatable-column
+          name="{{ '::EnterpriseName' | abpLocalization }}"
+          prop='enterpriseName'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.enterpriseName }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::Acronym' | abpLocalization }}" prop='acronym'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.acronym }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          name="{{ '::RegistrationNumber' | abpLocalization }}"
+          prop='registrationNumber'
+        >
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.registrationNumber }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="{{ '::TaxNumber' | abpLocalization }}" prop='taxNumber'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
+            {{ row.taxNumber }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column
+          [name]="'AbpUi::Actions' | abpLocalization"
+          [maxWidth]='150'
+          [width]='150'
+          [sortable]='false'
+        >
+          <ng-template let-row='row' let-i='rowIndex' ngx-datatable-cell-template>
+            <div ngbDropdown container='body' class='d-inline-block'>
+              <button
+                class='btn btn-primary btn-sm dropdown-toggle'
+                data-toggle='dropdown'
+                aria-haspopup='true'
+                ngbDropdownToggle
+              >
+                <i class='fa fa-cog me-1' aria-hidden='true'></i>
+                {{ 'AbpUi::Actions' | abpLocalization }}
+              </button>
+
+              <div ngbDropdownMenu>
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.BusinessProfiles.Edit'"
+                  (click)='update(row)'
+                >
+                  {{ 'AbpUi::Edit' | abpLocalization }}
+                </button>
+
+                <button
+                  ngbDropdownItem
+                  *abpPermission="'Platform.BusinessProfiles.Delete'"
+                  (click)='delete(row)'
+                >
+                  {{ 'AbpUi::Delete' | abpLocalization }}
+                </button>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</abp-page>
+
+<abp-modal [busy]='isModalBusy' [(visible)]='isModalOpen'>
+  <ng-template #abpHeader>
+    <h3>
+      {{ (selected ? 'AbpUi::Edit' : '::NewBusinessProfile') | abpLocalization }}
+    </h3>
+  </ng-template>
+
+  <ng-template #abpBody>
+    <form [formGroup]='form' id='business-profile' (ngSubmit)='submitForm()' validateOnSubmit>
+      <div class='mt-2 fade-in-top'>
+        <div class='mb-3'>
+          <label class='form-label' for='business-profile-enterprise-name'>
+            {{ '::EnterpriseName' | abpLocalization }} *
+          </label>
+
+          <input
+            id='business-profile-enterprise-name'
+            formControlName='enterpriseName'
+            class='form-control'
+            maxlength='100'
+            autofocus
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='business-profile-acronym'>
+            {{ '::Acronym' | abpLocalization }} *
+          </label>
+
+          <input
+            id='business-profile-acronym'
+            formControlName='acronym'
+            class='form-control'
+            maxlength='5'
+          />
+        </div>
+
+        <div class='mb-3'>
+          <label class='form-label' for='business-profile-registration-number'>
+            {{ '::RegistrationNumber' | abpLocalization }}
+          </label>
+
+          <input
+            id='business-profile-registration-number'
+            formControlName='registrationNumber'
+            class='form-control'
+          />
+        </div>
+        <div class='mb-3'>
+          <label class='form-label' for='business-profile-tax-number'>
+            {{ '::TaxNumber' | abpLocalization }}
+          </label>
+
+          <input
+            id='business-profile-tax-number'
+            formControlName='taxNumber'
+            class='form-control'
+          />
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #abpFooter>
+    <button type='button' class='btn btn-secondary' abpClose>
+      {{ 'AbpUi::Cancel' | abpLocalization }}
+    </button>
+
+    <abp-button iconClass='fa fa-check' buttonType='submit' formName='business-profile'>
+      {{ 'AbpUi::Save' | abpLocalization }}
+    </abp-button>
+  </ng-template>
+</abp-modal>
