@@ -2,6 +2,21 @@
 # yarn lockfile v1
 
 
+"@abp/core@~5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@abp/core/-/core-5.3.2.tgz#f16026cdfd993c78904a5afe6642b5da8fbc6707"
+  integrity sha512-kCS8XtL2UyqYavWYGN8SY2A9PKdY5fJxKBEB6GMin4v6LzJB8f7auomLY+gFJs0PjG2rYcyT7sgVijNlOs4ypg==
+  dependencies:
+    "@abp/utils" "~5.3.2"
+
+"@abp/font-awesome@^5.3.2":
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/@abp/font-awesome/-/font-awesome-5.3.2.tgz#2ae82288e1c4d664b673d2d7ec264f05fac98d7a"
+  integrity sha512-ZXNbI+U++Kz73FAEtWCc6KMZYQehqOQCSPEC4AfpYptK6fQ4weTARWzdfWcXluNSPeBtdl3Of+IR4TRjjUEyPA==
+  dependencies:
+    "@abp/core" "~5.3.2"
+    "@fortawesome/fontawesome-free" "^5.15.4"
+
 "@abp/ng.components@~5.3.2":
   version "5.3.2"
   resolved "https://registry.npmjs.org/@abp/ng.components/-/ng.components-5.3.2.tgz"

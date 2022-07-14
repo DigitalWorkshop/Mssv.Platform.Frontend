@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@abp/font-awesome": "^5.3.2",
     "@abp/ng.components": "~5.3.2",
     "@abp/ng.core": "~5.3.2",
     "@abp/ng.setting-management": "~5.3.2",

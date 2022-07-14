@@ -1,7 +1,7 @@
 import { eLayoutType, RoutesService } from '@abp/ng.core';
 import { APP_INITIALIZER } from '@angular/core';
 
-export const PRODUCTION_ROUTE_PROVIDER = [
+export const ENGINE_ROUTE_PROVIDER = [
   { provide: APP_INITIALIZER, useFactory: configureRoutes, deps: [RoutesService], multi: true }
 ];
 
@@ -9,27 +9,27 @@ function configureRoutes(routes: RoutesService) {
   return () => {
     routes.add([
       {
-        path: '/production',
-        iconClass: 'fas fa-file-alt',
-        name: '::Menu:Production',
+        path: '/engine',
+        iconClass: 'fas fa-cog',
+        name: '::Menu:Engine',
         layout: eLayoutType.application,
-        order: 9
+        order: 7
       },
       {
-        parentName: '::Menu:Production',
-        path: '/production/business-profiles',
+        parentName: '::Menu:Engine',
+        path: '/engine/tasks',
         iconClass: 'fas fa-file-alt',
-        name: '::Menu:Production:BusinessProfiles',
+        name: '::Menu:Engine:Tasks',
         layout: eLayoutType.application,
-        requiredPolicy: 'Platform.BusinessProfiles'
+        // requiredPolicy: 'Platform.Engine.Projects'
       },
       {
-        parentName: '::Menu:Production',
-        path: '/production/person-profiles',
+        parentName: '::Menu:Engine',
+        path: '/engine/hot-folders',
         iconClass: 'fas fa-file-alt',
-        name: '::Menu:Production:PersonProfiles',
+        name: '::Menu:Engine:HotFolders',
         layout: eLayoutType.application,
-        requiredPolicy: 'Platform.PersonProfiles'
+        // requiredPolicy: 'Platform.Engine.Projects'
       }
     ]);
   };
