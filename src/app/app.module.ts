@@ -35,16 +35,16 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     AppRoutingModule,
     CoreModule.forRoot({
       environment,
-      registerLocaleFn: registerLocale()
+      registerLocaleFn: registerLocale(),
     }),
     ThemeSharedModule.forRoot({
       httpErrorConfig: {
         errorScreen: {
           component: HttpErrorComponent,
           forWhichErrors: [401, 403, 404, 500],
-          hideCloseIcon: true
-        }
-      }
+          hideCloseIcon: true,
+        },
+      },
     }),
     AccountAdminConfigModule.forRoot(),
     AccountPublicConfigModule.forRoot(),
@@ -57,7 +57,7 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     SettingManagementConfigModule.forRoot(),
     ThemeLeptonModule.forRoot(),
     CommercialUiConfigModule.forRoot(),
-    GdprConfigModule.forRoot()
+    GdprConfigModule.forRoot(),
   ],
   providers: [
     APP_ROUTE_PROVIDER,
@@ -68,7 +68,6 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     OPERATIONS_ROUTE_PROVIDER,
     PRODUCTION_ROUTE_PROVIDER
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
