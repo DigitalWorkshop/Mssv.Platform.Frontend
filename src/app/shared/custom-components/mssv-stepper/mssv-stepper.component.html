@@ -1,0 +1,306 @@
+<div class='card-body py-5 px-lg-5 px-0'>
+
+  <div class='d-lg-flex'>
+    <div class='lpx-wizard vertical d-flex'>
+      <ul class='lpx-wizard-list d-flex flex-column p-0'>
+        <li *ngFor='let step of steps; index as i;' class='lpx-wizard-item my-lg-2 pe-lg-3 my-0 pe-0 mb-2'
+            [ngClass]="{'active' : stepper.activeStep === step.step }" (click)='selectTab(step.step);'
+            data-wizard-item=''>
+          <span class='lpx-wizard-number flex-center rounded-3 mb-2 mx-auto'><strong>{{ step.step }}</strong></span>
+          <h5 class='mb-0 text-dark'><strong>{{ step.title }}</strong></h5>
+          <small class='text-muted'>{{ step.description }}</small>
+        </li>
+      </ul>
+    </div>
+
+    <div class='py-5 py-xl-0'>
+
+      <div class='lpx-wizard-content ps-lg-5 px-4 fade-in-top' data-form-tab=''
+           [ngClass]="{'active' : stepper.activeStep === 1}">
+        <div class='mb-3'>
+          <h3 class='text-dark'><strong>Choose Content Type</strong></h3>
+          <div class='d-flex'>
+            <p class='text-muted me-1'>If you need more info, please check out </p>
+            <a href='javascript:void(0)' class='text-decoration-none'><strong> Help Page.</strong></a>
+          </div>
+        </div>
+
+        <div class='d-flex mt-3'>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3 me-3'>
+            <i class='bi bi-camera-reels d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Film</strong></h5>
+            <small class='text-muted'>A film that typically has a run time between 80 minutes and 180 minutes
+              long</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3'>
+            <i class='bi bi-tv d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>TV Series</strong></h5>
+            <small class='text-muted'>A group of programs created with a common
+              series title, usually related to one another in subject or another way</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+        </div>
+
+        <div class='d-flex mt-3'>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3 me-3'>
+            <i class='bi bi-person-video2 d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Comedy Special</strong></h5>
+            <small class='text-muted'>A comedic performance to a live audience in which the performer addresses the
+              audience directly from the stage</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3'>
+            <i class='bi bi-camera-video d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Short</strong></h5>
+            <small class='text-muted'>An original motion picture that has a running time of 40 minutes or less,
+              including all credits</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+        </div>
+
+        <div class='d-flex mt-3'>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3 me-3'>
+            <i class='bi bi-journal-album d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Documentary</strong></h5>
+            <small class='text-muted'>A non-fictional motion-picture intended to "document reality, primarily for the
+              purposes of instruction, education or maintaining a historical record"</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3'>
+            <i class='bi bi-person-video d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Web Series</strong></h5>
+            <small class='text-muted'>A series of scripted or non-scripted online videos, generally in episodic form,
+              released on the Internet.</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+
+        </div>
+
+        <div class='d-flex mt-3'>
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3 me-3'>
+            <i class='bi bi-mic d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Podcast</strong></h5>
+            <small class='text-muted'>A podcast is a program made available in digital format for download over the
+              Internet</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+
+          <a href='javascript:void(0)'
+             class='select-item d-inline-block border rounded-3 text-dark text-decoration-none px-4 py-3'>
+            <i class='bi bi-question d-block fs-3 mb-2'></i>
+            <h5 class='mb-1'><strong>Other</strong></h5>
+            <small class='text-muted'>Any other type of content</small>
+            <i class='bi bi-check-lg text-primary fs-3' style='top: 15px; right: 15px;'></i>
+          </a>
+        </div>
+      </div>
+
+      <div class='lpx-wizard-content ps-lg-5 px-4 fade-in-top' data-form-tab=''
+           [ngClass]="{'active' : stepper.activeStep === 2}">
+        <div class='mb-3'>
+          <h3 class='text-dark'><strong>Search IMDb</strong></h3>
+          <div class='d-flex'>
+            <p class='text-muted me-1'>If you need more info, please check out </p>
+            <a href='javascript:void(0)' class='text-decoration-none'><strong> Help Page.</strong></a>
+          </div>
+        </div>
+
+        <div class='mb-3'>
+          <input [(ngModel)]='search'
+                 typeaheadOptionField='title'
+                 [typeahead]='suggestions$'
+                 [typeaheadAsync]='true'
+                 [typeaheadWaitMs]='800'
+                 [typeaheadMinLength]='2'
+                 [typeaheadOrderBy]='sortConfig3'
+                 [typeaheadScrollable]='true'
+                 [typeaheadOptionsInScrollableView]='5'
+                 [typeaheadItemTemplate]='customItemTemplate'
+                 (typeaheadOnSelect)='imdbMovieSelected($event)'
+                 class='form-control border-0 py-2 px-3'
+                 placeholder='Start typing to search...'>
+
+          <ng-template #customItemTemplate let-model='item'>
+            <span><strong>{{model.title}}</strong> - {{model.release_date}}</span>
+          </ng-template>
+
+          <div class='alert alert-danger' role='alert' *ngIf='errorMessage'>
+            {{ errorMessage }}
+          </div>
+
+          <form [formGroup]='firstFormGroup'>
+            <input type='hidden' formControlName='theMovieDb' />
+            <input type='hidden' formControlName='theOpenMovieDb' />
+            <input type='hidden' formControlName='imdbId'>
+          </form>
+
+        </div>
+      </div>
+
+
+      <div class='lpx-wizard-content ps-lg-5 px-4 fade-in-top' data-form-tab=''
+           [ngClass]="{'active' : stepper.activeStep === 3}">
+
+        <div class='mb-3'>
+          <h3 class='text-dark'><strong>Business Info</strong></h3>
+          <div class='d-flex'>
+            <p class='text-muted me-1'>If you need more info, please check out </p>
+            <a href='javascript:void(0)' class='text-decoration-none'><strong> Help Page.</strong></a>
+          </div>
+        </div>
+
+        <div class='mb-3'>
+          <label for='businessName' class='form-label'>Business Name <span class='text-danger'>*</span></label>
+          <input type='text' class='form-control border-0 py-2 px-3' id='businessName'>
+        </div>
+
+        <div class='mb-3'>
+          <label for='shortenedDescriptor' class='form-label'>Shortened Descriptor <span
+            class='text-danger'>*</span></label>
+          <i class='bi bi-exclamation-circle opacity-50 ms-1' data-bs-toggle='tooltip' data-bs-html='true'
+             title=''
+             data-bs-original-title='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+             aria-label='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '></i>
+
+          <input type='text' class='form-control border-0 py-2 px-3' id='shortenedDescriptor'>
+          <small class='text-muted'>Customers will see this shortened version of your statement descriptor</small>
+        </div>
+
+        <div class='mb-3'>
+          <label for='businessDescription' class='form-label'>Business Description <span
+            class='text-danger'>*</span></label>
+          <select class='form-select' aria-label='select'>
+            <option selected=''>Select</option>
+            <option value='1'>One</option>
+            <option value='2'>Two</option>
+            <option value='3'>Three</option>
+          </select>
+        </div>
+
+        <div class='mb-3'>
+          <label for='businessDescription' class='form-label'>Business Description <span
+            class='text-danger'>*</span></label>
+          <textarea name='' id='businessDescription' class='form-control border-0 py-2 px-3'
+                    aria-describedby=''></textarea>
+        </div>
+
+        <div class='mb-3'>
+          <label for='contactEmail' class='form-label'>Contact Email <span class='text-danger'>*</span></label>
+          <input type='mail' class='form-control border-0 py-2 px-3' id='contactEmail'>
+        </div>
+
+
+      </div>
+
+
+      <div class='lpx-wizard-content ps-lg-5 px-4 fade-in-top' data-form-tab=''
+           [ngClass]="{'active' : stepper.activeStep === 4}">
+
+
+        <div class='mb-3'>
+          <h3 class='text-dark'><strong>Billing Details</strong></h3>
+          <div class='d-flex'>
+            <p class='text-muted me-1'>If you need more info, please check out </p>
+            <a href='javascript:void(0)' class='text-decoration-none'><strong> Help Page.</strong></a>
+          </div>
+        </div>
+
+        <div class='mb-3'>
+          <label for='nameCard' class='form-label'>Name on Card<span class='text-danger'> *</span></label>
+          <i class='bi bi-exclamation-circle opacity-50 ms-1' data-bs-toggle='tooltip' data-bs-html='true'
+             title=''
+             data-bs-original-title='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+             aria-label='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '></i>
+          <input type='text' class='form-control border-0 py-2 px-3' id='nameCard'>
+        </div>
+
+        <div class='mb-3'>
+          <label for='cardNumber' class='form-label'>Card Number<span class='text-danger'> *</span></label>
+          <input type='number' class='form-control border-0 py-2 px-3' id='cardNumber'>
+        </div>
+
+        <div class='row mb-3'>
+          <div class='col-md-6'>
+            <label for='expirationMonth' class='form-label'>Expiration Month / Year<span
+              class='text-danger'>*</span></label>
+            <input type='text' class='form-control border-0 py-2 px-3' id='expirationMonth'>
+          </div>
+          <div class='col-md-6'>
+            <label for='cvv' class='form-label'>CVV<span class='text-danger'> *</span></label>
+            <i class='bi bi-exclamation-circle opacity-50 ms-1' data-bs-toggle='tooltip' data-bs-html='true'
+               title=''
+               data-bs-original-title='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+               aria-label='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '></i>
+            <input type='text' class='form-control border-0 py-2 px-3' id='cvv'>
+          </div>
+
+        </div>
+
+        <div class='form-check mx-1 ps-3'>
+          <input class='form-check-input' type='checkbox' value='' id='flexCheckDefault'>
+          <label class='form-check-label' for='flexCheckDefault'>
+            Save the Card
+          </label>
+        </div>
+
+
+      </div>
+      <div class='lpx-wizard-content ps-lg-5 px-4 fade-in-top' data-form-tab=''
+           [ngClass]="{'active' : stepper.activeStep === 5}">
+
+        <div class='mb-3'>
+          <h3 class='text-dark'><strong>Your Are Done!</strong></h3>
+          <div class='d-flex justify-content-center'>
+            <p class='text-muted me-1'>If you need more info, please check out </p>
+            <a href='javascript:void(0)' class='text-decoration-none'><strong> Sign In.</strong></a>
+          </div>
+        </div>
+
+        <div class='d-flex'>
+          <i class='bi bi-patch-exclamation-fill text-primary d-block fs-1 me-2'></i>
+          <div>
+            <h4 class='mb-0'>We need your attention!</h4>
+            <small class='text-muted'>To start using great tools, please</small>
+          </div>
+        </div>
+        <button class='btn border mt-4 d-block'>
+          <i class='bi bi-plus-circle me-2'></i>
+          Create Team Platform
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class='row mt-3'>
+    <div class='col-10 col-xl-6 mx-auto'>
+      <div class='lpx-wizard-buttons d-flex justify-content-between'>
+        <button class='btn btn-outline-dark' type='button' data-btn-previous='true' style='opacity: 1;'
+                (click)='stepperPrevious()'><i class='bi bi-arrow-left me-2'></i> Return
+        </button>
+        <button class='btn btn-primary' type='button' data-btn-next='true' style='opacity: 1;'
+                (click)='stepperNext()'>Next <i class='bi bi-arrow-right ms-2'></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

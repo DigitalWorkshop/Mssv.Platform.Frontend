@@ -63,6 +63,7 @@
                 "inject": true,
                 "bundleName": "fontawesome-v4-shims.min"
               },
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.scss"
             ],

@@ -15,7 +15,6 @@ import { LanguageManagementConfigModule } from '@volo/abp.ng.language-management
 import { registerLocale } from '@volo/abp.ng.language-management/locale';
 import { SaasConfigModule } from '@volo/abp.ng.saas/config';
 import { TextTemplateManagementConfigModule } from '@volo/abp.ng.text-template-management/config';
-import { HttpErrorComponent, ThemeLeptonModule } from '@volo/abp.ng.theme.lepton';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +25,9 @@ import { OPERATIONS_ROUTE_PROVIDER } from './operations/providers/operations-rou
 import { ENGINE_ROUTE_PROVIDER } from './engine/providers/engine-route.provider';
 import { CONFIG_ROUTE_PROVIDER } from './config/providers/config-route.provider';
 import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-route.provider';
+import { HttpErrorComponent, ThemeLeptonXModule } from '@volosoft/abp.ng.theme.lepton-x';
+import { SideMenuLayoutModule } from '@volosoft/abp.ng.theme.lepton-x/layouts';
+import { MssvModule } from '../@mssv/mssv.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,16 +37,16 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     AppRoutingModule,
     CoreModule.forRoot({
       environment,
-      registerLocaleFn: registerLocale(),
+      registerLocaleFn: registerLocale()
     }),
     ThemeSharedModule.forRoot({
       httpErrorConfig: {
         errorScreen: {
           component: HttpErrorComponent,
           forWhichErrors: [401, 403, 404, 500],
-          hideCloseIcon: true,
-        },
-      },
+          hideCloseIcon: true
+        }
+      }
     }),
     AccountAdminConfigModule.forRoot(),
     AccountPublicConfigModule.forRoot(),
@@ -55,9 +57,14 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     IdentityServerConfigModule.forRoot(),
     TextTemplateManagementConfigModule.forRoot(),
     SettingManagementConfigModule.forRoot(),
-    ThemeLeptonModule.forRoot(),
+    // ThemeLeptonModule.forRoot(),
+    ThemeLeptonXModule.forRoot(),
+    SideMenuLayoutModule.forRoot(), // depends on which layout you choose
     CommercialUiConfigModule.forRoot(),
     GdprConfigModule.forRoot(),
+
+    // MSSV modules
+    MssvModule.forRoot()
   ],
   providers: [
     APP_ROUTE_PROVIDER,
@@ -68,6 +75,7 @@ import { MEDIA_POOL_ROUTE_PROVIDER } from './media-pool/providers/media-pool-rou
     OPERATIONS_ROUTE_PROVIDER,
     PRODUCTION_ROUTE_PROVIDER
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

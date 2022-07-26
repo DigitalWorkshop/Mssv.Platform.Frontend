@@ -23,6 +23,9 @@ export const environment = {
       url: 'https://localhost:44348',
       rootNamespace: 'Mssv.Platform',
     },
+    omdb: {
+      url: '//www.omdbapi.com/',
+    },
     AbpAccountPublic: {
       url: oAuthConfig.issuer,
       rootNamespace: 'AbpAccountPublic',

@@ -1,397 +1,397 @@
 <abp-page [title]="'::Titles' | abpLocalization">
-  <abp-page-toolbar-container class="col">
-    <div class="text-lg-end pt-2">
+  <abp-page-toolbar-container class='col'>
+    <div class='text-lg-end pt-2'>
       <button
         *abpPermission="'Platform.Titles.Create'"
-        class="btn btn-primary btn-sm"
-        type="button"
-        (click)="create()"
+        class='btn btn-primary btn-sm'
+        type='button'
+        (click)='create()'
       >
-        <i class="fa fa-plus me-1" aria-hidden="true"></i>
+        <i class='fa fa-plus me-1' aria-hidden='true'></i>
         {{ '::NewTitle' | abpLocalization }}
       </button>
     </div>
   </abp-page-toolbar-container>
 
-  <abp-advanced-entity-filters localizationSourceName="" [list]="list">
+  <abp-advanced-entity-filters localizationSourceName='' [list]='list'>
     <abp-advanced-entity-filters-form>
-      <form #filterForm (keyup.enter)="list.get()">
-        <div class="row">
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="nameFilter">
+      <form #filterForm (keyup.enter)='list.get()'>
+        <div class='row'>
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='nameFilter'>
                 {{ '::Name' | abpLocalization }}
               </label>
 
               <input
-                id="nameFilter"
-                class="form-control"
-                [(ngModel)]="filters.name"
-                [ngModelOptions]="{ standalone: true }"
+                id='nameFilter'
+                class='form-control'
+                [(ngModel)]='filters.name'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="titleTypeFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='titleTypeFilter'>
                 {{ '::TitleType' | abpLocalization }}
               </label>
 
               <select
-                id="titleTypeFilter"
-                class="form-select form-control"
-                [(ngModel)]="filters.titleType"
-                [ngModelOptions]="{ standalone: true }"
+                id='titleTypeFilter'
+                class='form-select form-control'
+                [(ngModel)]='filters.titleType'
+                [ngModelOptions]='{ standalone: true }'
               >
-                <option [ngValue]=""></option>
+                <option [ngValue]=''></option>
                 <option
                   *ngFor="let option of contentTypeOptions; trackBy: track.by('value')"
-                  [ngValue]="option.value"
+                  [ngValue]='option.value'
                 >
                   {{ '::Enum:ContentType.' + option.key | abpLocalization }}
                 </option>
               </select>
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="imdbIdFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='imdbIdFilter'>
                 {{ '::ImdbId' | abpLocalization }}
               </label>
 
               <input
-                id="imdbIdFilter"
-                class="form-control"
-                [(ngModel)]="filters.imdbId"
-                [ngModelOptions]="{ standalone: true }"
+                id='imdbIdFilter'
+                class='form-control'
+                [(ngModel)]='filters.imdbId'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="theMovieDbIdFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='theMovieDbIdFilter'>
                 {{ '::TheMovieDbId' | abpLocalization }}
               </label>
 
               <input
-                id="theMovieDbIdFilter"
-                class="form-control"
-                [(ngModel)]="filters.theMovieDbId"
-                [ngModelOptions]="{ standalone: true }"
+                id='theMovieDbIdFilter'
+                class='form-control'
+                [(ngModel)]='filters.theMovieDbId'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="keywordsFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='keywordsFilter'>
                 {{ '::Keywords' | abpLocalization }}
               </label>
 
               <input
-                id="keywordsFilter"
-                class="form-control"
-                [(ngModel)]="filters.keywords"
-                [ngModelOptions]="{ standalone: true }"
+                id='keywordsFilter'
+                class='form-control'
+                [(ngModel)]='filters.keywords'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="minReleaseDate">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='minReleaseDate'>
                 {{ '::MinReleaseDate' | abpLocalization }}
               </label>
 
-              <div class="input-group" validationTarget>
+              <div class='input-group' validationTarget>
                 <input
-                  id="minReleaseDate"
-                  class="form-control"
+                  id='minReleaseDate'
+                  class='form-control'
                   #minReleaseDateInput
-                  #minReleaseDateDatepicker="ngbDatepicker"
-                  name="minReleaseDate"
+                  #minReleaseDateDatepicker='ngbDatepicker'
+                  name='minReleaseDate'
                   ngbDatepicker
-                  container="body"
+                  container='body'
                   readonly
-                  (click)="minReleaseDateDatepicker.toggle()"
-                  (keyup.space)="minReleaseDateDatepicker.toggle()"
-                  [(ngModel)]="filters.releaseDateMin"
-                  [ngModelOptions]="{ standalone: true }"
+                  (click)='minReleaseDateDatepicker.toggle()'
+                  (keyup.space)='minReleaseDateDatepicker.toggle()'
+                  [(ngModel)]='filters.releaseDateMin'
+                  [ngModelOptions]='{ standalone: true }'
                 />
-                <div *ngIf="minReleaseDateInput.value" class="input-group-append">
+                <div *ngIf='minReleaseDateInput.value' class='input-group-append'>
                   <button
-                    class="btn btn-link px-2"
-                    type="button"
+                    class='btn btn-link px-2'
+                    type='button'
                     [title]="'AbpUi::Clear' | abpLocalization"
-                    (click)="
+                    (click)='
                       minReleaseDateDatepicker.writeValue(null);
                       minReleaseDateDatepicker.manualDateChange(null, true)
-                    "
+                    '
                   >
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i class='fa fa-times' aria-hidden='true'></i>
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="maxReleaseDate">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='maxReleaseDate'>
                 {{ '::MaxReleaseDate' | abpLocalization }}
               </label>
 
-              <div class="input-group" validationTarget>
+              <div class='input-group' validationTarget>
                 <input
-                  id="maxReleaseDate"
-                  class="form-control"
+                  id='maxReleaseDate'
+                  class='form-control'
                   #maxReleaseDateInput
-                  #maxReleaseDateDatepicker="ngbDatepicker"
-                  name="maxReleaseDate"
+                  #maxReleaseDateDatepicker='ngbDatepicker'
+                  name='maxReleaseDate'
                   ngbDatepicker
                   readonly
-                  (click)="maxReleaseDateDatepicker.toggle()"
-                  (keyup.space)="maxReleaseDateDatepicker.toggle()"
-                  [(ngModel)]="filters.releaseDateMax"
-                  [ngModelOptions]="{ standalone: true }"
+                  (click)='maxReleaseDateDatepicker.toggle()'
+                  (keyup.space)='maxReleaseDateDatepicker.toggle()'
+                  [(ngModel)]='filters.releaseDateMax'
+                  [ngModelOptions]='{ standalone: true }'
                 />
-                <div *ngIf="maxReleaseDateInput.value" class="input-group-append">
+                <div *ngIf='maxReleaseDateInput.value' class='input-group-append'>
                   <button
-                    class="btn btn-link px-2"
-                    type="button"
+                    class='btn btn-link px-2'
+                    type='button'
                     [title]="'AbpUi::Clear' | abpLocalization"
-                    (click)="
+                    (click)='
                       maxReleaseDateDatepicker.writeValue(null);
                       maxReleaseDateDatepicker.manualDateChange(null, true)
-                    "
+                    '
                   >
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i class='fa fa-times' aria-hidden='true'></i>
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="posterUrlFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='posterUrlFilter'>
                 {{ '::PosterUrl' | abpLocalization }}
               </label>
 
               <input
-                id="posterUrlFilter"
-                class="form-control"
-                [(ngModel)]="filters.posterUrl"
-                [ngModelOptions]="{ standalone: true }"
+                id='posterUrlFilter'
+                class='form-control'
+                [(ngModel)]='filters.posterUrl'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="genreFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='genreFilter'>
                 {{ '::Genre' | abpLocalization }}
               </label>
 
               <input
-                id="genreFilter"
-                class="form-control"
-                [(ngModel)]="filters.genre"
-                [ngModelOptions]="{ standalone: true }"
+                id='genreFilter'
+                class='form-control'
+                [(ngModel)]='filters.genre'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="descriptionFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='descriptionFilter'>
                 {{ '::Description' | abpLocalization }}
               </label>
 
               <input
-                id="descriptionFilter"
-                class="form-control"
-                [(ngModel)]="filters.description"
-                [ngModelOptions]="{ standalone: true }"
+                id='descriptionFilter'
+                class='form-control'
+                [(ngModel)]='filters.description'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="ratingFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='ratingFilter'>
                 {{ '::Rating' | abpLocalization }}
               </label>
 
               <input
-                id="ratingFilter"
-                class="form-control"
-                [(ngModel)]="filters.rating"
-                [ngModelOptions]="{ standalone: true }"
+                id='ratingFilter'
+                class='form-control'
+                [(ngModel)]='filters.rating'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="plotFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='plotFilter'>
                 {{ '::Plot' | abpLocalization }}
               </label>
 
               <input
-                id="plotFilter"
-                class="form-control"
-                [(ngModel)]="filters.plot"
-                [ngModelOptions]="{ standalone: true }"
+                id='plotFilter'
+                class='form-control'
+                [(ngModel)]='filters.plot'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="minRuntime">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='minRuntime'>
                 {{ '::MinRuntime' | abpLocalization }}
               </label>
 
               <input
-                id="minRuntime"
-                type="number"
-                class="form-control"
-                [(ngModel)]="filters.runtimeMin"
-                [ngModelOptions]="{ standalone: true }"
+                id='minRuntime'
+                type='number'
+                class='form-control'
+                [(ngModel)]='filters.runtimeMin'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
 
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="maxRuntime">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='maxRuntime'>
                 {{ '::MaxRuntime' | abpLocalization }}
               </label>
 
               <input
-                id="maxRuntime"
-                type="number"
-                class="form-control"
-                [(ngModel)]="filters.runtimeMax"
-                [ngModelOptions]="{ standalone: true }"
+                id='maxRuntime'
+                type='number'
+                class='form-control'
+                [(ngModel)]='filters.runtimeMax'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="alternativeTitleNamesFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='alternativeTitleNamesFilter'>
                 {{ '::AlternativeTitleNames' | abpLocalization }}
               </label>
 
               <input
-                id="alternativeTitleNamesFilter"
-                class="form-control"
-                [(ngModel)]="filters.alternativeTitleNames"
-                [ngModelOptions]="{ standalone: true }"
+                id='alternativeTitleNamesFilter'
+                class='form-control'
+                [(ngModel)]='filters.alternativeTitleNames'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="countryOfOriginFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='countryOfOriginFilter'>
                 {{ '::CountryOfOrigin' | abpLocalization }}
               </label>
 
               <input
-                id="countryOfOriginFilter"
-                class="form-control"
-                [(ngModel)]="filters.countryOfOrigin"
-                [ngModelOptions]="{ standalone: true }"
+                id='countryOfOriginFilter'
+                class='form-control'
+                [(ngModel)]='filters.countryOfOrigin'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="originalLanguageFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='originalLanguageFilter'>
                 {{ '::OriginalLanguage' | abpLocalization }}
               </label>
 
               <input
-                id="originalLanguageFilter"
-                class="form-control"
-                [(ngModel)]="filters.originalLanguage"
-                [ngModelOptions]="{ standalone: true }"
+                id='originalLanguageFilter'
+                class='form-control'
+                [(ngModel)]='filters.originalLanguage'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="directorsFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='directorsFilter'>
                 {{ '::Directors' | abpLocalization }}
               </label>
 
               <input
-                id="directorsFilter"
-                class="form-control"
-                [(ngModel)]="filters.directors"
-                [ngModelOptions]="{ standalone: true }"
+                id='directorsFilter'
+                class='form-control'
+                [(ngModel)]='filters.directors'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="writersFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='writersFilter'>
                 {{ '::Writers' | abpLocalization }}
               </label>
 
               <input
-                id="writersFilter"
-                class="form-control"
-                [(ngModel)]="filters.writers"
-                [ngModelOptions]="{ standalone: true }"
+                id='writersFilter'
+                class='form-control'
+                [(ngModel)]='filters.writers'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="actorsFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='actorsFilter'>
                 {{ '::Actors' | abpLocalization }}
               </label>
 
               <input
-                id="actorsFilter"
-                class="form-control"
-                [(ngModel)]="filters.actors"
-                [ngModelOptions]="{ standalone: true }"
+                id='actorsFilter'
+                class='form-control'
+                [(ngModel)]='filters.actors'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="productionCompanyFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='productionCompanyFilter'>
                 {{ '::ProductionCompany' | abpLocalization }}
               </label>
 
               <input
-                id="productionCompanyFilter"
-                class="form-control"
-                [(ngModel)]="filters.productionCompany"
-                [ngModelOptions]="{ standalone: true }"
+                id='productionCompanyFilter'
+                class='form-control'
+                [(ngModel)]='filters.productionCompany'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
-          <div class="col-12 col-sm-auto">
-            <div class="mb-3">
-              <label class="form-label" for="distributorFilter">
+          <div class='col-12 col-sm-auto'>
+            <div class='mb-3'>
+              <label class='form-label' for='distributorFilter'>
                 {{ '::Distributor' | abpLocalization }}
               </label>
 
               <input
-                id="distributorFilter"
-                class="form-control"
-                [(ngModel)]="filters.distributor"
-                [ngModelOptions]="{ standalone: true }"
+                id='distributorFilter'
+                class='form-control'
+                [(ngModel)]='filters.distributor'
+                [ngModelOptions]='{ standalone: true }'
               />
             </div>
           </div>
 
-          <div class="col-12 col-sm-auto align-self-end mb-3">
-            <div class="row">
-              <div class="col-6 col-sm-auto d-grid">
-                <button type="button" class="btn btn-outline-primary" (click)="clearFilters()">
+          <div class='col-12 col-sm-auto align-self-end mb-3'>
+            <div class='row'>
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-outline-primary' (click)='clearFilters()'>
                   <span>{{ 'AbpUi::Clear' | abpLocalization }}</span>
                 </button>
               </div>
-              <div class="col-6 col-sm-auto d-grid">
-                <button type="button" class="btn btn-primary" (click)="list.get()">
+              <div class='col-6 col-sm-auto d-grid'>
+                <button type='button' class='btn btn-primary' (click)='list.get()'>
                   <span>{{ 'AbpUi::Refresh' | abpLocalization }}</span>
                 </button>
               </div>
@@ -402,24 +402,24 @@
     </abp-advanced-entity-filters-form>
   </abp-advanced-entity-filters>
 
-  <div class="card">
-    <div class="card-body">
-      <ngx-datatable [rows]="data.items" [count]="data.totalCount" [list]="list" default>
+  <div class='card'>
+    <div class='card-body'>
+      <ngx-datatable [rows]='data.items' [count]='data.totalCount' [list]='list' default>
         <ngx-datatable-column
           [name]="'AbpUi::Actions' | abpLocalization"
-          [maxWidth]="150"
-          [width]="150"
-          [sortable]="false"
+          [maxWidth]='150'
+          [width]='150'
+          [sortable]='false'
         >
-          <ng-template let-row="row" let-i="rowIndex" ngx-datatable-cell-template>
-            <div ngbDropdown container="body" class="d-inline-block">
+          <ng-template let-row='row' let-i='rowIndex' ngx-datatable-cell-template>
+            <div ngbDropdown container='body' class='d-inline-block'>
               <button
-                class="btn btn-primary btn-sm dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
+                class='btn btn-primary btn-sm dropdown-toggle'
+                data-toggle='dropdown'
+                aria-haspopup='true'
                 ngbDropdownToggle
               >
-                <i class="fa fa-cog me-1" aria-hidden="true"></i>
+                <i class='fa fa-cog me-1' aria-hidden='true'></i>
                 {{ 'AbpUi::Actions' | abpLocalization }}
               </button>
 
@@ -427,7 +427,7 @@
                 <button
                   ngbDropdownItem
                   *abpPermission="'Platform.Titles.Edit'"
-                  (click)="update(row)"
+                  (click)='update(row)'
                 >
                   {{ 'AbpUi::Edit' | abpLocalization }}
                 </button>
@@ -435,7 +435,7 @@
                 <button
                   ngbDropdownItem
                   *abpPermission="'Platform.Titles.Delete'"
-                  (click)="delete(row)"
+                  (click)='delete(row)'
                 >
                   {{ 'AbpUi::Delete' | abpLocalization }}
                 </button>
@@ -444,134 +444,134 @@
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Name' | abpLocalization }}" prop="name">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Name' | abpLocalization }}" prop='name'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.name }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::TitleType' | abpLocalization }}" prop="titleType">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::TitleType' | abpLocalization }}" prop='titleType'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ '::Enum:ContentType.' + row.titleType | abpLocalization }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::ImdbId' | abpLocalization }}" prop="imdbId">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::ImdbId' | abpLocalization }}" prop='imdbId'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.imdbId }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::TheMovieDbId' | abpLocalization }}" prop="theMovieDbId">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::TheMovieDbId' | abpLocalization }}" prop='theMovieDbId'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.theMovieDbId }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Keywords' | abpLocalization }}" prop="keywords">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Keywords' | abpLocalization }}" prop='keywords'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.keywords }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::ReleaseDate' | abpLocalization }}" prop="releaseDate">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::ReleaseDate' | abpLocalization }}" prop='releaseDate'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.releaseDate | date }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::PosterUrl' | abpLocalization }}" prop="posterUrl">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::PosterUrl' | abpLocalization }}" prop='posterUrl'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.posterUrl }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Genre' | abpLocalization }}" prop="genre">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Genre' | abpLocalization }}" prop='genre'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.genre }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Description' | abpLocalization }}" prop="description">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Description' | abpLocalization }}" prop='description'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.description }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Rating' | abpLocalization }}" prop="rating">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Rating' | abpLocalization }}" prop='rating'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.rating }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Plot' | abpLocalization }}" prop="plot">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Plot' | abpLocalization }}" prop='plot'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.plot }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Runtime' | abpLocalization }}" prop="runtime">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Runtime' | abpLocalization }}" prop='runtime'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.runtime }}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column
           name="{{ '::AlternativeTitleNames' | abpLocalization }}"
-          prop="alternativeTitleNames"
+          prop='alternativeTitleNames'
         >
-          <ng-template let-row="row" ngx-datatable-cell-template>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.alternativeTitleNames }}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column
           name="{{ '::CountryOfOrigin' | abpLocalization }}"
-          prop="countryOfOrigin"
+          prop='countryOfOrigin'
         >
-          <ng-template let-row="row" ngx-datatable-cell-template>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.countryOfOrigin }}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column
           name="{{ '::OriginalLanguage' | abpLocalization }}"
-          prop="originalLanguage"
+          prop='originalLanguage'
         >
-          <ng-template let-row="row" ngx-datatable-cell-template>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.originalLanguage }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Directors' | abpLocalization }}" prop="directors">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Directors' | abpLocalization }}" prop='directors'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.directors }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Writers' | abpLocalization }}" prop="writers">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Writers' | abpLocalization }}" prop='writers'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.writers }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Actors' | abpLocalization }}" prop="actors">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Actors' | abpLocalization }}" prop='actors'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.actors }}
           </ng-template>
         </ngx-datatable-column>
 
         <ngx-datatable-column
           name="{{ '::ProductionCompany' | abpLocalization }}"
-          prop="productionCompany"
+          prop='productionCompany'
         >
-          <ng-template let-row="row" ngx-datatable-cell-template>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.productionCompany }}
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="{{ '::Distributor' | abpLocalization }}" prop="distributor">
-          <ng-template let-row="row" ngx-datatable-cell-template>
+        <ngx-datatable-column name="{{ '::Distributor' | abpLocalization }}" prop='distributor'>
+          <ng-template let-row='row' ngx-datatable-cell-template>
             {{ row.distributor }}
           </ng-template>
         </ngx-datatable-column>
@@ -580,7 +580,7 @@
   </div>
 </abp-page>
 
-<abp-modal [busy]="isModalBusy" [(visible)]="isModalOpen">
+<abp-modal [busy]='isModalBusy' [(visible)]='isModalOpen' [options]='modalOptions'>
   <ng-template #abpHeader>
     <h3>
       {{ (selected ? 'AbpUi::Edit' : '::NewTitle') | abpLocalization }}
@@ -588,210 +588,17 @@
   </ng-template>
 
   <ng-template #abpBody>
-    <form [formGroup]="form" id="title" (ngSubmit)="submitForm()" validateOnSubmit>
-      <div class="mt-2 fade-in-top">
-        <div class="mb-3">
-          <label class="form-label" for="title-name"> {{ '::Name' | abpLocalization }} * </label>
 
-          <input id="title-name" formControlName="name" class="form-control" autofocus />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-title-type">
-            {{ '::TitleType' | abpLocalization }}
-          </label>
+    <div class='card'>
 
-          <select
-            id="title-title-type"
-            formControlName="titleType"
-            class="form-select form-control"
-          >
-            <option [ngValue]=""></option>
-            <option
-              *ngFor="let option of contentTypeOptions; trackBy: track.by('key')"
-              [ngValue]="option.value"
-            >
-              {{ '::Enum:ContentType.' + option.key | abpLocalization }}
-            </option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-imdb-id">
-            {{ '::ImdbId' | abpLocalization }}
-          </label>
+      <app-mssv-stepper></app-mssv-stepper>
 
-          <input id="title-imdb-id" formControlName="imdbId" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-the-movie-db-id">
-            {{ '::TheMovieDbId' | abpLocalization }}
-          </label>
+    </div>
 
-          <input id="title-the-movie-db-id" formControlName="theMovieDbId" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-keywords">
-            {{ '::Keywords' | abpLocalization }}
-          </label>
-
-          <input id="title-keywords" formControlName="keywords" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-release-date">
-            {{ '::ReleaseDate' | abpLocalization }}
-          </label>
-
-          <div class="input-group" validationTarget>
-            <input
-              readonly
-              id="title-release-date"
-              formControlName="releaseDate"
-              class="form-control"
-              ngbDatepicker
-              #releaseDateInput
-              #releaseDateDatepicker="ngbDatepicker"
-              (click)="releaseDateDatepicker.open()"
-              (keyup.space)="releaseDateDatepicker.open()"
-            />
-            <div *ngIf="releaseDateInput.value" class="input-group-append">
-              <button
-                class="btn btn-link px-2"
-                type="button"
-                [title]="'AbpUi::Clear' | abpLocalization"
-                (click)="
-                  releaseDateDatepicker.writeValue(null);
-                  releaseDateDatepicker.manualDateChange(null, true)
-                "
-              >
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-poster-url">
-            {{ '::PosterUrl' | abpLocalization }}
-          </label>
-
-          <input id="title-poster-url" formControlName="posterUrl" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-genre">
-            {{ '::Genre' | abpLocalization }}
-          </label>
-
-          <input id="title-genre" formControlName="genre" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-description">
-            {{ '::Description' | abpLocalization }}
-          </label>
-
-          <input id="title-description" formControlName="description" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-rating">
-            {{ '::Rating' | abpLocalization }}
-          </label>
-
-          <input id="title-rating" formControlName="rating" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-plot">
-            {{ '::Plot' | abpLocalization }}
-          </label>
-
-          <input id="title-plot" formControlName="plot" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-runtime">
-            {{ '::Runtime' | abpLocalization }}
-          </label>
-
-          <input type="number" id="title-runtime" formControlName="runtime" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-alternative-title-names">
-            {{ '::AlternativeTitleNames' | abpLocalization }}
-          </label>
-
-          <input
-            id="title-alternative-title-names"
-            formControlName="alternativeTitleNames"
-            class="form-control"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-country-of-origin">
-            {{ '::CountryOfOrigin' | abpLocalization }}
-          </label>
-
-          <input
-            id="title-country-of-origin"
-            formControlName="countryOfOrigin"
-            class="form-control"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-original-language">
-            {{ '::OriginalLanguage' | abpLocalization }}
-          </label>
-
-          <input
-            id="title-original-language"
-            formControlName="originalLanguage"
-            class="form-control"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-directors">
-            {{ '::Directors' | abpLocalization }}
-          </label>
-
-          <input id="title-directors" formControlName="directors" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-writers">
-            {{ '::Writers' | abpLocalization }}
-          </label>
-
-          <input id="title-writers" formControlName="writers" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-actors">
-            {{ '::Actors' | abpLocalization }}
-          </label>
-
-          <input id="title-actors" formControlName="actors" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-production-company">
-            {{ '::ProductionCompany' | abpLocalization }}
-          </label>
-
-          <input
-            id="title-production-company"
-            formControlName="productionCompany"
-            class="form-control"
-          />
-        </div>
-        <div class="mb-3">
-          <label class="form-label" for="title-distributor">
-            {{ '::Distributor' | abpLocalization }}
-          </label>
-
-          <input id="title-distributor" formControlName="distributor" class="form-control" />
-        </div>
-      </div>
-    </form>
   </ng-template>
 
   <ng-template #abpFooter>
-    <button type="button" class="btn btn-secondary" abpClose>
-      {{ 'AbpUi::Cancel' | abpLocalization }}
-    </button>
 
-    <abp-button iconClass="fa fa-check" buttonType="submit" formName="title">
-      {{ 'AbpUi::Save' | abpLocalization }}
-    </abp-button>
   </ng-template>
+
 </abp-modal>

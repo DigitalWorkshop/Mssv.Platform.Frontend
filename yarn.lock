@@ -2225,13 +2225,6 @@
     "@abp/ng.theme.shared" "~5.3.2"
     tslib "^2.0.0"
 
-"@volo/abp.ng.account.core@~5.3.2":
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/@volo/abp.ng.account.core/-/abp.ng.account.core-5.3.2.tgz#140c5ca493b4a4d119d29c7ca3a724818e0fc62e"
-  integrity sha512-Jif46GpiCzfMLXDU4TjkhjtIyoB8vkAVzn+akk88UDOOAZT/nX3uU95JQS/CCFhTCdUYRYmO5RX8fSFiJ86DKA==
-  dependencies:
-    tslib "^2.0.0"
-
 "@volo/abp.ng.account@~5.3.2":
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/@volo/abp.ng.account/-/abp.ng.account-5.3.2.tgz#b627c7eba4e70a4b89ee5a811f9ebb1ff1892744"
@@ -2299,6 +2292,14 @@
     "@volo/abp.commercial.ng.ui" "~5.3.2"
     tslib "^2.0.0"
 
+"@volo/abp.ng.lepton-x.core@1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@volo/abp.ng.lepton-x.core/-/abp.ng.lepton-x.core-1.0.0-beta.3.tgz#768870b57e94f950f08bd0c17f71023cec401bdb"
+  integrity sha512-tWRbkahCqdPQZ4FYA0dUYXQLgRUOHJKjYDTkYfhWkUVDzdbfq8farnq0zP8668arURVt8q7Wcgl8NJoWIaIhCA==
+  dependencies:
+    "@volo/ngx-lepton-x.core" "1.0.0-beta.3"
+    tslib "^2.3.0"
+
 "@volo/abp.ng.saas@~5.3.2":
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/@volo/abp.ng.saas/-/abp.ng.saas-5.3.2.tgz#78f0d0ad1493b646b9e0474d3c44027000a8ad6b"
@@ -2320,15 +2321,32 @@
     "@volo/abp.commercial.ng.ui" "~5.3.2"
     tslib "^2.0.0"
 
-"@volo/abp.ng.theme.lepton@~5.3.2":
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/@volo/abp.ng.theme.lepton/-/abp.ng.theme.lepton-5.3.2.tgz#4940d93f6bcd4ab7bfa6abfde0e226819bc4cda2"
-  integrity sha512-qp2YdF8I9Y6jhc+zQbAB8/U2ZSPjKoNs2dvmrgZstEXgnKw64v3OGdDJVTh4+D9rbJ+06Rp0x6iBEqEacnCsTQ==
+"@volo/ngx-lepton-x.core@1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@volo/ngx-lepton-x.core/-/ngx-lepton-x.core-1.0.0-beta.3.tgz#d143760b771ba9d5664b5856cfd37bbdc154ee9d"
+  integrity sha512-oPGpEBuYyqXZbeddJo9njaVdMSe1dI6/YVXsN5xS3RYOAOqjQloz++ZrxY3JV0zZnmhEdTh3RRgyG3EMzokVBQ==
   dependencies:
-    "@abp/ng.setting-management" "~5.3.2"
-    "@abp/ng.theme.shared" "~5.3.2"
-    "@volo/abp.ng.account.core" "~5.3.2"
-    tslib "^2.0.0"
+    tslib "^2.3.0"
+
+"@volosoft/abp.ng.theme.lepton-x@^1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@volosoft/abp.ng.theme.lepton-x/-/abp.ng.theme.lepton-x-1.0.0-beta.3.tgz#033b26abdbc52537e582b2ad15621d3492dc7655"
+  integrity sha512-vLN/xF4GNz4BCv3GYec+TzYUhnlewShZxcG+wjVTXt0DHEqxmGY9Lgmo4qI/KGBWpgcbLkybwqmW4ml0qItkmw==
+  dependencies:
+    "@volo/abp.ng.lepton-x.core" "1.0.0-beta.3"
+    "@volosoft/ngx-lepton-x" "1.0.0-beta.3"
+    tslib "^2.3.0"
+
+"@volosoft/ngx-lepton-x@1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@volosoft/ngx-lepton-x/-/ngx-lepton-x-1.0.0-beta.3.tgz#a1f433f782ab1c7cd8a2b04d2101a72def222f26"
+  integrity sha512-bDRwbTToHgT/CprGPC70ZomqDEj45/6V+Ok/w0ssxWLmBTY9Rq9MePFaXWloRZVHEhfqumbSnF+b42k49DuCQA==
+  dependencies:
+    "@volo/ngx-lepton-x.core" "1.0.0-beta.3"
+    bootstrap-icons "~1.7.2"
+    ng-observe "^1.1.0"
+    ngx-perfect-scrollbar "~10.1.1"
+    tslib "^2.3.0"
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -2859,6 +2877,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap-icons@~1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.7.2.tgz#4024e081e2c850602552e1fed6451e682d09322a"
+  integrity sha512-NiR2PqC73AQOPdVSu6GJfnk+hN2z6powcistXk1JgPnKuoV2FSdSl26w931Oz9HYbKCcKUSB6ncZTYJAYJl3QQ==
 
 bootstrap@^5.1.1:
   version "5.1.3"
@@ -5886,6 +5909,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5957,6 +5985,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-observe@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ng-observe/-/ng-observe-1.1.0.tgz#56714d40d33bc4bd7343d00e6db1387a53ee56b3"
+  integrity sha512-PNZwzcRmAK4dRZsR7GKirqd+kzHEi41Om3i5as+Q0jJCyrlE3Au7nLtEh4KugCroqNnG1c9UB8HMAKFHxSo4Uw==
+  dependencies:
+    tslib "^2.0.0"
+
 ng-packagr@^13.1.2:
   version "13.3.1"
   resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-13.3.1.tgz#e2456f2920cf177e7dad4e9baee9adea884779db"
@@ -6012,6 +6047,15 @@ ngx-intl-tel-input@^3.2.0:
   integrity sha512-TM3R0Az+F63eNCBj+NpR6UzJYg4FkHxDrS2hfeFoHJymMc4+DlqB581g4tPil4IkMetlR+jaAtEcqKiqmYGYlw==
   dependencies:
     tslib "^2.3.0"
+
+ngx-perfect-scrollbar@~10.1.1:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/ngx-perfect-scrollbar/-/ngx-perfect-scrollbar-10.1.1.tgz#f89832b9109e89bb59d516184638accd028e9735"
+  integrity sha512-f9IaDJGlBzSxnJ3Ki76n2JdzfQngUFyCf0E+CuVLaR5jL0IJDcTu7vOs8wexXunRMTd8xvIv0+sdIxf8hXAGWg==
+  dependencies:
+    perfect-scrollbar "1.5.0"
+    resize-observer-polyfill "^1.5.0"
+    tslib "^2.0.0"
 
 nice-napi@^1.0.2:
   version "1.0.2"
@@ -6489,6 +6533,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+perfect-scrollbar@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/perfect-scrollbar/-/perfect-scrollbar-1.5.0.tgz#821d224ed8ff61990c23f26db63048cdc75b6b83"
+  integrity sha512-NrNHJn5mUGupSiheBTy6x+6SXCFbLlm8fVZh9moIzw/LgqElN5q4ncR4pbCBCYuCJ8Kcl9mYM0NgDxvW+b4LxA==
 
 picocolors@^1.0.0:
   version "1.0.0"
@@ -7134,6 +7183,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
+
+resize-observer-polyfill@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz#0e9020dd3d21024458d4ebd27e23e40269810464"
+  integrity sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==
 
 resolve-alpn@^1.0.0:
   version "1.2.1"

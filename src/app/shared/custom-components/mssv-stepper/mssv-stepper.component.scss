@@ -1,0 +1,67 @@
+
+@media only screen and (max-width: 991px) {
+  .lpx-wizard {
+    padding: 0 40px;
+  }
+}
+.lpx-wizard-list {
+  z-index: 1;
+}
+.lpx-wizard-item {
+  flex: 1;
+  text-align: center;
+  border-bottom: 2px solid var(--lpx-content-text);
+  padding-bottom: 8px;
+  opacity: 0.4;
+  list-style: none;
+}
+.lpx-wizard-item .lpx-wizard-number {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--lpx-content-bg);
+  color: var(--lpx-content-text);
+  background-color: var(--lpx-card-bg);
+}
+.lpx-wizard-item.active {
+  opacity: 1;
+}
+.lpx-wizard-item.active .lpx-wizard-number {
+  color: var(--lpx-light);
+  background-color: var(--lpx-dark);
+  border-color: var(--lpx-dark);
+}
+.lpx-wizard-content {
+  display: none;
+}
+.lpx-wizard-content .select-item {
+  position: relative;
+}
+.lpx-wizard-content .select-item .bi-check-lg {
+  position: absolute;
+  opacity: 0;
+}
+.lpx-wizard-content .select-item:focus {
+  border-color: var(--lpx-primary) !important;
+}
+.lpx-wizard-content .select-item:focus .bi-check-lg {
+  opacity: 1 !important;
+}
+.lpx-wizard-content.active {
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .lpx-wizard.vertical .lpx-wizard-list {
+    width: 100%;
+  }
+}
+.lpx-wizard.vertical .lpx-wizard-list .lpx-wizard-item {
+  border-right: 2px solid var(--lpx-content-text);
+  border-bottom: none;
+}
+@media only screen and (max-width: 991px) {
+  .lpx-wizard.vertical .lpx-wizard-list .lpx-wizard-item {
+    border-bottom: 2px solid var(--lpx-content-text);
+    border-right: none;
+  }
+}
+

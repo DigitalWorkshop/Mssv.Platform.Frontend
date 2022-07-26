@@ -8,18 +8,19 @@ import { filter, finalize, switchMap, tap } from 'rxjs/operators';
 import { contentTypeOptions } from '../../../proxy/content-library/common/content-type.enum';
 import type { GetTitlesInput, TitleDto } from '../../../proxy/content-library/titles/models';
 import { TitleService } from '../../../proxy/content-library/titles/title.service';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap/modal/modal-config';
 
 @Component({
   selector: 'app-title',
   changeDetection: ChangeDetectionStrategy.Default,
   providers: [ListService, { provide: NgbDateAdapter, useClass: DateAdapter }],
   templateUrl: './list.component.html',
-  styles: [],
+  styles: []
 })
 export class TitleListComponent implements OnInit {
   data: PagedResultDto<TitleDto> = {
     items: [],
-    totalCount: 0,
+    totalCount: 0
   };
 
   filters = {} as GetTitlesInput;
@@ -32,6 +33,8 @@ export class TitleListComponent implements OnInit {
 
   isModalOpen = false;
 
+  modalOptions: NgbModalOptions = { size: 'xl' };
+
   selected?: TitleDto;
 
   contentTypeOptions = contentTypeOptions;
@@ -42,14 +45,15 @@ export class TitleListComponent implements OnInit {
     public readonly service: TitleService,
     private confirmation: ConfirmationService,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     const getData = (query: ABP.PageQueryParams) =>
       this.service.getList({
         ...query,
         ...this.filters,
-        filterText: query.filter,
+        filterText: query.filter
       });
 
     const setData = (list: PagedResultDto<TitleDto>) => (this.data = list);
@@ -82,7 +86,7 @@ export class TitleListComponent implements OnInit {
       writers,
       actors,
       productionCompany,
-      distributor,
+      distributor
     } = this.selected || {};
 
     this.form = this.fb.group({
@@ -105,7 +109,7 @@ export class TitleListComponent implements OnInit {
       writers: [writers ?? null, []],
       actors: [actors ?? null, []],
       productionCompany: [productionCompany ?? null, []],
-      distributor: [distributor ?? null, []],
+      distributor: [distributor ?? null, []]
     });
   }
 
