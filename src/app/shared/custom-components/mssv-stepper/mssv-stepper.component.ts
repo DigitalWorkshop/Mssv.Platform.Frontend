@@ -14,6 +14,7 @@ import { TheOpenMovieDbService } from '../../../../@mssv/services/the-open-movie
 import { MssvUtilsService } from '../../../../@mssv/services/mssv-utils.service';
 import * as moment from 'moment';
 import { TypeaheadMatch, TypeaheadOrder } from 'ngx-bootstrap/typeahead';
+import { MovieLookupDto, MovieLookupService } from '@proxy/content-library/movie-lookups';
 
 @Component({
   selector: 'app-mssv-stepper',
@@ -42,7 +43,7 @@ export class MssvStepperComponent implements OnInit {
     field: 'release_date'
   };
 
-
+  selected: MovieLookupDto;
   // Private
   private readonly _unsubscribeAll: Subject<any>;
 
@@ -51,7 +52,8 @@ export class MssvStepperComponent implements OnInit {
               private _bulletinBoardService: BulletinBoardService,
               private _theMovieDbService: TheMovieDbService,
               private _theOpenMovieDbService: TheOpenMovieDbService,
-              private _mssvUtilsService: MssvUtilsService
+              private _mssvUtilsService: MssvUtilsService,
+              public readonly service: MovieLookupService
   ) {
     // Set the defaults
     this.firstFormGroup = this._formBuilder.group({

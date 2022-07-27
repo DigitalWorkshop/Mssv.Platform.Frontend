@@ -9,6 +9,8 @@ import {
   PartialMovieResult,
   SearchMovieResult
 } from './_models/the-movie-db.models';
+import { PagedResultDto, Rest, RestService } from '@abp/ng.core';
+import { LookupDto, LookupRequestDto } from '@proxy/shared';
 
 const tmdbInfo = {
   TMDB_ENDPOINT: '//api.themoviedb.org/3/',
@@ -21,23 +23,33 @@ const tmdbInfo = {
 @Injectable({
   providedIn: 'root'
 })
+
 export class TheMovieDbService {
   apiKey: string;
   configuration: Observable<ConfigResult>;
   imgBasePath: string;
   defaultPosterSize: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private restService: RestService) {
     this.apiKey = tmdbInfo.TMDB_API_KEY;
     this.imgBasePath = tmdbInfo.TMDB_IMG_BASE_URL;
     this.defaultPosterSize = tmdbInfo.TMDB_DEFAULT_POSTER_SIZE;
     this.configuration = this.getConfig();
   }
 
-  getConfig(): Observable<ConfigResult> {
-    const params = new HttpParams()
-      .set('api_key', this.apiKey);
-    return this.http.get<ConfigResult>(tmdbInfo.TMDB_ENDPOINT + 'configuration', { params });
+  private getConfig(): Observable<ConfigResult> {
+
+    const request: Rest.Request<null> = {
+      method: 'GET',
+      url: '/configuration',
+      params: {
+        'api_key': this.apiKey
+      },
+      withCredentials: false
+    };
+
+    return this.restService.request<null, ConfigResult>(request, { apiName: 'tmdb' });
+
   }
 
   public searchMovieNames(filter: string): Observable<SearchMovieResult> {
@@ -46,27 +58,51 @@ export class TheMovieDbService {
       return new Observable<SearchMovieResult>();
     }
 
-    const params = new HttpParams()
-      .set('api_key', this.apiKey)
-      .set('query', filter);
-    return this.http.get<SearchMovieResult>(tmdbInfo.TMDB_ENDPOINT + 'search/movie', { params });
+    const request: Rest.Request<null> = {
+      method: 'GET',
+      url: '/search/movie',
+      params: {
+        'api_key': this.apiKey,
+        'query': filter
+      },
+      withCredentials: false
+    };
+
+    return this.restService.request<null, SearchMovieResult>(request, { apiName: 'tmdb', skipHandleError: true });
 
   }
 
   public searchForMovieByImdbId(imdbId: string): Observable<PartialMovieResult[]> {
-    const params = new HttpParams()
-      .set('api_key', this.apiKey)
-      .set('external_source', 'imdb_id'); //
-    return this.http.get<FindResult>(tmdbInfo.TMDB_ENDPOINT + 'find/' + imdbId, { params })
+
+    const request: Rest.Request<null> = {
+      method: 'GET',
+      url: '/search/movie',
+      params: {
+        'api_key': this.apiKey,
+        'external_source': imdbId
+      },
+      withCredentials: false
+    };
+
+    return this.restService.request<null, FindResult>(request, { apiName: 'tmdb' })
       .pipe(
         map(res => res.movie_results)
       );
   }
 
   public getFullMovie(movieDbId: number): Observable<MovieResult> {
-    const params = new HttpParams()
-      .set('api_key', this.apiKey);
-    return this.http.get<MovieResult>(tmdbInfo.TMDB_ENDPOINT + 'movie/' + movieDbId, { params });
+
+    const request: Rest.Request<null> = {
+      method: 'GET',
+      url: '/movie/' + movieDbId,
+      params: {
+        'api_key': this.apiKey
+      },
+      withCredentials: false
+    };
+
+    return this.restService.request<null, MovieResult>(request, { apiName: 'tmdb' });
+
   }
 
   public getMoviePosterUrl(posterPath: string): string {
@@ -76,4 +112,12 @@ export class TheMovieDbService {
     }
     return posterUrl;
   }
+
+  getMovieLookup = (input: LookupRequestDto) =>
+    this.restService.request<any, PagedResultDto<LookupDto<string>>>({
+        method: 'GET',
+        url: '/api/app/movie-lookup',
+        params: { filter: input.filter, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      });
+
 }

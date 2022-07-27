@@ -123,30 +123,19 @@
         </div>
 
         <div class='mb-3'>
-          <input [(ngModel)]='search'
-                 typeaheadOptionField='title'
-                 [typeahead]='suggestions$'
-                 [typeaheadAsync]='true'
-                 [typeaheadWaitMs]='800'
-                 [typeaheadMinLength]='2'
-                 [typeaheadOrderBy]='sortConfig3'
-                 [typeaheadScrollable]='true'
-                 [typeaheadOptionsInScrollableView]='5'
-                 [typeaheadItemTemplate]='customItemTemplate'
-                 (typeaheadOnSelect)='imdbMovieSelected($event)'
-                 class='form-control border-0 py-2 px-3'
-                 placeholder='Start typing to search...'>
-
-          <ng-template #customItemTemplate let-model='item'>
-            <span><strong>{{model.title}}</strong> - {{model.release_date}}</span>
-          </ng-template>
-
-          <div class='alert alert-danger' role='alert' *ngIf='errorMessage'>
-            {{ errorMessage }}
-          </div>
 
           <form [formGroup]='firstFormGroup'>
-            <input type='hidden' formControlName='theMovieDb' />
+
+            <abp-lookup-typeahead
+              cid='the-movie-db-id'
+              formControlName='theMovieDb'
+              displayNameProp='title'
+              lookupNameProp='title'
+              [getFn]='service.getMovieLookup'
+              [editingData]='selected?.title'
+            ></abp-lookup-typeahead>
+
+
             <input type='hidden' formControlName='theOpenMovieDb' />
             <input type='hidden' formControlName='imdbId'>
           </form>

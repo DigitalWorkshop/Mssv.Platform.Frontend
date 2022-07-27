@@ -8,27 +8,30 @@ const oAuthConfig = {
   clientId: 'Platform_App',
   responseType: 'code',
   scope: 'offline_access Platform',
-  requireHttps: true,
+  requireHttps: true
 };
 
 export const environment = {
   production: false,
   application: {
     baseUrl,
-    name: 'Platform',
+    name: 'Platform'
   },
   oAuthConfig,
   apis: {
     default: {
       url: 'https://localhost:44348',
-      rootNamespace: 'Mssv.Platform',
+      rootNamespace: 'Mssv.Platform'
     },
     omdb: {
-      url: '//www.omdbapi.com/',
+      url: '//www.omdbapi.com'
+    },
+    tmdb: {
+      url: '//api.themoviedb.org/3'
     },
     AbpAccountPublic: {
       url: oAuthConfig.issuer,
-      rootNamespace: 'AbpAccountPublic',
-    },
-  },
+      rootNamespace: 'AbpAccountPublic'
+    }
+  }
 } as Environment;
