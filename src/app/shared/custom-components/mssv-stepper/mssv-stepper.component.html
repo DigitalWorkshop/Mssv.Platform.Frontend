@@ -124,21 +124,42 @@
 
         <div class='mb-3'>
 
+
+          <input [(ngModel)]='search'
+                 [typeahead]='suggestions$'
+                 [typeaheadAsync]='true'
+                 [typeaheadOptionsLimit]='10'
+                 [typeaheadMinLength]='2'
+                 [typeaheadWaitMs]='400'
+                 [typeaheadItemTemplate]='customItemTemplate'
+                 [typeaheadOrderBy]='sortConfig3'
+                 typeaheadOptionField='title'
+                 (typeaheadOnSelect)='imdbMovieSelected($event)'
+                 placeholder='Typeahead inside a form'
+                 class='form-control'>
+
+          <ng-template #customItemTemplate let-model='item'>
+            <span><strong>{{ model.title }}</strong> ({{ model.releaseDate | date:'YYYY' }})</span>
+          </ng-template>
+
+
           <form [formGroup]='firstFormGroup'>
 
-            <abp-lookup-typeahead
-              cid='the-movie-db-id'
-              formControlName='theMovieDb'
-              displayNameProp='title'
-              lookupNameProp='title'
-              [getFn]='service.getMovieLookup'
-              [editingData]='selected?.title'
-            ></abp-lookup-typeahead>
-
+            <!--            <abp-lookup-typeahead
+                          cid='the-movie-db-id'
+                          formControlName='theMovieDb'
+                          displayNameProp='title'
+                          lookupNameProp='title'
+                          (select)='imdbMovieSelected($event)'
+                          [getFn]='service.getMovieInfo'
+                          [editingData]='selected'
+                        ></abp-lookup-typeahead>-->
 
             <input type='hidden' formControlName='theOpenMovieDb' />
             <input type='hidden' formControlName='imdbId'>
           </form>
+
+          {{ firstFormGroup.getRawValue() | json }}
 
         </div>
       </div>

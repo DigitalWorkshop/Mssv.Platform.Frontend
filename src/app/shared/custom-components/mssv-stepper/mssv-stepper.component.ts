@@ -14,7 +14,10 @@ import { TheOpenMovieDbService } from '../../../../@mssv/services/the-open-movie
 import { MssvUtilsService } from '../../../../@mssv/services/mssv-utils.service';
 import * as moment from 'moment';
 import { TypeaheadMatch, TypeaheadOrder } from 'ngx-bootstrap/typeahead';
-import { MovieLookupDto, MovieLookupService } from '@proxy/content-library/movie-lookups';
+import { MovieInfoDto, MovieInfoService } from '@proxy/content-library/movie-info';
+import { LookupDto } from '@proxy/shared';
+import { PagedResultDto } from '@abp/ng.core';
+
 
 @Component({
   selector: 'app-mssv-stepper',
@@ -27,7 +30,7 @@ export class MssvStepperComponent implements OnInit {
   steps: MssvStepperSteps[];
 
   search?: string;
-  suggestions$?: Observable<PartialMovieResult[]>;
+  suggestions$?: Observable<MovieInfoDto[]>;
   errorMessage?: string;
 
   firstFormGroup: FormGroup;
@@ -40,10 +43,10 @@ export class MssvStepperComponent implements OnInit {
 
   sortConfig3: TypeaheadOrder = {
     direction: 'desc',
-    field: 'release_date'
+    field: 'releaseDate'
   };
 
-  selected: MovieLookupDto;
+  selected: any;
   // Private
   private readonly _unsubscribeAll: Subject<any>;
 
@@ -53,7 +56,7 @@ export class MssvStepperComponent implements OnInit {
               private _theMovieDbService: TheMovieDbService,
               private _theOpenMovieDbService: TheOpenMovieDbService,
               private _mssvUtilsService: MssvUtilsService,
-              public readonly service: MovieLookupService
+              public readonly service: MovieInfoService
   ) {
     // Set the defaults
     this.firstFormGroup = this._formBuilder.group({
@@ -120,25 +123,26 @@ export class MssvStepperComponent implements OnInit {
 
     this.suggestions$ = new Observable((observer: Observer<string | undefined>) => {
       observer.next(this.search);
-    }).pipe(
-      takeUntil(this._unsubscribeAll),
-      switchMap((query: string) => {
-        if (query) {
-          // using the movie database API
-          return this._theMovieDbService.searchMovieNames(query)
-            .pipe(
-              // Sort by Release Date, the newest first.
-              map((data: SearchMovieResult) => data && data.results || []),
-              tap(() => noop, err => {
-                // in case of http error
-                this.errorMessage = err && err.message || 'Something went wrong';
-              })
-            );
-        }
+    })
+      .pipe(
+        takeUntil(this._unsubscribeAll),
+        switchMap((query: string) => {
+          if (query) {
+            // using the movie database API
+            return this.service.getMovieInfo({ filter: query, maxResultCount: 10, skipCount: 0 })
+              .pipe(
+                // Sort by Release Date, the newest first.
+                map((data: PagedResultDto<MovieInfoDto>) => data && data.items || []),
+                tap(() => noop, err => {
+                  // in case of http error
+                  this.errorMessage = err && err.message || 'Something went wrong';
+                })
+              );
+          }
 
-        return of([]);
-      })
-    );
+          return of([]);
+        })
+      );
 
   }
 
@@ -157,18 +161,19 @@ export class MssvStepperComponent implements OnInit {
   imdbMovieSelected(event: TypeaheadMatch): void {
     const partialMovie = event.item;
 
-    this._theMovieDbService.getFullMovie(partialMovie.id)
+    this.service.get(partialMovie.id)
       .subscribe(movie => {
-        this.posterUrl = this._theMovieDbService.getMoviePosterUrl(movie.poster_path);
-        this.firstFormGroup.controls.imdbId.setValue(movie.imdb_id);
+
+        this.posterUrl = this._theMovieDbService.getMoviePosterUrl(movie.posterPath);
+        this.firstFormGroup.controls.imdbId.setValue(movie.imdbId);
         this.firstFormGroup.controls.theMovieDb.setValue(movie);
         this.secondFormGroup.controls.title.setValue(movie.title);
 
-        this._theOpenMovieDbService.searchForMovieByImdbId(movie.imdb_id)
-          .subscribe(oMovie => {
-            this.secondFormGroup.controls.title.setValue(oMovie.title);
-            this.firstFormGroup.controls.theOpenMovieDb.setValue(oMovie);
-          });
+        /*        this._theOpenMovieDbService.searchForMovieByImdbId(movie.imdbId)
+                  .subscribe(oMovie => {
+                    this.secondFormGroup.controls.title.setValue(oMovie.title);
+                    this.firstFormGroup.controls.theOpenMovieDb.setValue(oMovie);
+                  });*/
       });
   }
 

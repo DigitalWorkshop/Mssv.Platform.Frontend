@@ -1,3 +1,5 @@
 import * as Common from './common';
 import * as Titles from './titles';
-export { Common, Titles };
+import * as MovieInfo from './movie-info';
+
+export { Common, Titles, MovieInfo };
